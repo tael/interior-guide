@@ -165,8 +165,8 @@ export function SearchPage() {
             </button>
           </div>
           <div className="flex flex-col gap-3">
-            {featured.slice(0, 6).map((item) => (
-              <QACard key={item.id} item={item} />
+            {featured.slice(0, 6).map((item, i) => (
+              <QACard key={item.id} item={item} rank={i + 1} />
             ))}
           </div>
         </div>

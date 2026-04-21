@@ -84,4 +84,11 @@ export const useQAStore = create<QAStore>((set, get) => ({
     saveJSON('likes', next)
     set({ likesMap: next })
   },
+
+  importData: (userQuestions, favorites, likesMap) => {
+    saveJSON('userQuestions', userQuestions)
+    saveJSON('favorites', favorites)
+    saveJSON('likes', likesMap)
+    set({ userQuestions, favorites, likesMap })
+  },
 }))

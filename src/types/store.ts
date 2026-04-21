@@ -19,4 +19,5 @@ export interface QAStore {
   setSelectedItem: (item: QAItem | null) => void
   likesMap: Record<string, number>
   incrementLike: (id: string) => void
+  importData: (userQuestions: QAItem[], favorites: string[], likesMap: Record<string, number>) => void
 }

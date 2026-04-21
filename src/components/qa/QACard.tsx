@@ -7,9 +7,12 @@ import { highlight } from '@/utils/highlight'
 interface Props {
   item: QAItem
   compact?: boolean
+  rank?: number
 }
 
-export function QACard({ item, compact = false }: Props) {
+const RANK_BADGE: Record<number, string> = { 1: '🥇', 2: '🥈', 3: '🥉' }
+
+export function QACard({ item, compact = false, rank }: Props) {
   const { favorites, toggleFavorite, setSelectedItem, likesMap, incrementLike, searchQuery } = useQAStore()
   const isFav = favorites.includes(item.id)
   const category = CATEGORIES.find((c) => c.id === item.category)
@@ -27,7 +30,10 @@ export function QACard({ item, compact = false }: Props) {
         >
           {category?.icon} {item.category}
         </span>
-        {item.isFeatured && (
+        {rank && rank <= 3 && (
+          <span className="text-base leading-none">{RANK_BADGE[rank]}</span>
+        )}
+        {item.isFeatured && !rank && (
           <span className="text-xs bg-orange-50 text-orange-500 px-2 py-0.5 rounded-full font-medium">
             인기
           </span>
