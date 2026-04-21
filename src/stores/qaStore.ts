@@ -5,6 +5,8 @@ import { searchItems } from '@/utils/search'
 import type { QAItem } from '@/types/qa'
 import type { QAStore } from '@/types/store'
 
+const MAX_RECENT = 8
+
 const ALL_ITEMS = (): QAItem[] => {
   const userQs = loadJSON<QAItem[]>('userQuestions', [])
   return [...KNOWLEDGE_BASE, ...userQs]
@@ -16,6 +18,7 @@ export const useQAStore = create<QAStore>((set, get) => ({
   searchResults: [],
   favorites: loadJSON<string[]>('favorites', []),
   userQuestions: loadJSON<QAItem[]>('userQuestions', []),
+  recentSearches: loadJSON<string[]>('recentSearches', []),
   selectedItem: null,
   likesMap: loadJSON<Record<string, number>>('likes', {}),
 
@@ -25,10 +28,23 @@ export const useQAStore = create<QAStore>((set, get) => ({
 
   search: (query) => {
     const results = searchItems(ALL_ITEMS(), query)
-    set({ searchQuery: query, searchResults: results })
+    const trimmed = query.trim()
+    if (trimmed) {
+      const prev = get().recentSearches.filter((r) => r !== trimmed)
+      const next = [trimmed, ...prev].slice(0, MAX_RECENT)
+      saveJSON('recentSearches', next)
+      set({ searchQuery: query, searchResults: results, recentSearches: next })
+    } else {
+      set({ searchQuery: query, searchResults: results })
+    }
   },
 
   clearSearch: () => set({ searchQuery: '', searchResults: [] }),
+
+  clearRecentSearches: () => {
+    saveJSON('recentSearches', [])
+    set({ recentSearches: [] })
+  },
 
   toggleFavorite: (id) => {
     const { favorites } = get()

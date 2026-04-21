@@ -6,7 +6,7 @@ import { getFeaturedItems } from '@/utils/search'
 import { useRef } from 'react'
 
 export function SearchPage() {
-  const { searchQuery, searchResults, search, clearSearch, setActiveTab, setSelectedItem } =
+  const { searchQuery, searchResults, search, clearSearch, setActiveTab, setSelectedItem, recentSearches, clearRecentSearches } =
     useQAStore()
   const inputRef = useRef<HTMLInputElement>(null)
   const featured = getFeaturedItems(KNOWLEDGE_BASE)
@@ -92,6 +92,29 @@ export function SearchPage() {
       {/* 기본 화면 (검색어 없을 때) */}
       {!searchQuery && (
         <div className="px-4">
+          {/* 최근 검색어 */}
+          {recentSearches.length > 0 && (
+            <div className="mb-5">
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-sm font-semibold text-gray-600">최근 검색어</h2>
+                <button onClick={clearRecentSearches} className="text-xs text-gray-400">
+                  전체 삭제
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {recentSearches.map((q) => (
+                  <button
+                    key={q}
+                    onClick={() => search(q)}
+                    className="text-xs bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full active:bg-orange-100 active:text-orange-600 transition-colors"
+                  >
+                    🕐 {q}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* 카테고리 빠른 접근 */}
           <h2 className="text-sm font-semibold text-gray-600 mb-3">카테고리별 보기</h2>
           <div className="grid grid-cols-5 gap-2 mb-6">

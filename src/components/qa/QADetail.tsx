@@ -3,8 +3,14 @@ import { CATEGORIES } from '@/constants/categories'
 import clsx from 'clsx'
 
 export function QADetail() {
-  const { selectedItem, favorites, toggleFavorite, deleteUserQuestion, setSelectedItem, likesMap, incrementLike } =
+  const { selectedItem, favorites, toggleFavorite, deleteUserQuestion, setSelectedItem, setActiveTab, search, likesMap, incrementLike } =
     useQAStore()
+
+  const handleTagClick = (tag: string) => {
+    setSelectedItem(null)
+    setActiveTab('search')
+    search(tag)
+  }
 
   if (!selectedItem) return null
 
@@ -81,9 +87,13 @@ export function QADetail() {
       {item.tags.length > 0 && (
         <div className="flex flex-wrap gap-1.5 mb-5">
           {item.tags.map((tag) => (
-            <span key={tag} className="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full">
+            <button
+              key={tag}
+              onClick={() => handleTagClick(tag)}
+              className="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full active:bg-orange-100 active:text-orange-600 transition-colors"
+            >
               #{tag}
-            </span>
+            </button>
           ))}
         </div>
       )}
