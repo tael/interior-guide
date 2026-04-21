@@ -3,6 +3,7 @@ import { CATEGORIES } from '@/constants/categories'
 import { KNOWLEDGE_BASE } from '@/constants/knowledgeBase'
 import { useQAStore } from '@/stores/qaStore'
 import { QACard } from '@/components/qa/QACard'
+import { CostCalc } from '@/components/browse/CostCalc'
 import { getItemsByCategory } from '@/utils/search'
 
 export function BrowsePage() {
@@ -49,6 +50,7 @@ export function BrowsePage() {
 
   return (
     <div className="px-4">
+      <CostCalc />
       <div className="flex flex-col gap-2">
         {CATEGORIES.map((cat) => {
           const count = getItemsByCategory(allItems, cat.id).length

@@ -9,6 +9,8 @@ export function AddPage() {
     question: '',
     answer: '',
     tags: '',
+    linkUrl: '',
+    linkTitle: '',
   })
   const [submitted, setSubmitted] = useState(false)
 
@@ -18,6 +20,11 @@ export function AddPage() {
     e.preventDefault()
     if (!isValid) return
 
+    const relatedLinks =
+      form.linkUrl.trim() && form.linkTitle.trim()
+        ? [{ title: form.linkTitle.trim(), url: form.linkUrl.trim(), type: 'site' as const }]
+        : []
+
     addUserQuestion({
       category: form.category,
       question: form.question.trim(),
@@ -26,7 +33,7 @@ export function AddPage() {
         .split(/[,\s]+/)
         .map((t) => t.trim())
         .filter(Boolean),
-      relatedLinks: [],
+      relatedLinks,
       isFeatured: false,
     })
     setSubmitted(true)
@@ -137,6 +144,27 @@ export function AddPage() {
             value={form.tags}
             onChange={(e) => setForm((f) => ({ ...f, tags: e.target.value }))}
             placeholder="예: 방수, 비용, 베란다"
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all"
+          />
+        </div>
+
+        {/* 참고 링크 (선택) */}
+        <div>
+          <label className="text-sm font-medium text-gray-700 block mb-1.5">
+            참고 링크 <span className="text-gray-400 font-normal">(선택)</span>
+          </label>
+          <input
+            type="text"
+            value={form.linkTitle}
+            onChange={(e) => setForm((f) => ({ ...f, linkTitle: e.target.value }))}
+            placeholder="링크 제목 (예: 도배 비용 블로그)"
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all mb-2"
+          />
+          <input
+            type="url"
+            value={form.linkUrl}
+            onChange={(e) => setForm((f) => ({ ...f, linkUrl: e.target.value }))}
+            placeholder="https://..."
             className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all"
           />
         </div>

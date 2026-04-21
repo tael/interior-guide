@@ -3,13 +3,19 @@ import { QACard } from '@/components/qa/QACard'
 import { KNOWLEDGE_BASE } from '@/constants/knowledgeBase'
 import { CATEGORIES } from '@/constants/categories'
 import { getFeaturedItems } from '@/utils/search'
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
+
+function getTodayTip() {
+  const dayIndex = new Date().getDate() % KNOWLEDGE_BASE.length
+  return KNOWLEDGE_BASE[dayIndex]
+}
 
 export function SearchPage() {
   const { searchQuery, searchResults, search, clearSearch, setActiveTab, setSelectedItem, recentSearches, clearRecentSearches } =
     useQAStore()
   const inputRef = useRef<HTMLInputElement>(null)
   const featured = getFeaturedItems(KNOWLEDGE_BASE)
+  const todayTip = useMemo(() => getTodayTip(), [])
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const q = e.target.value
@@ -114,6 +120,19 @@ export function SearchPage() {
               </div>
             </div>
           )}
+
+          {/* 오늘의 팁 */}
+          <div className="mb-5">
+            <h2 className="text-sm font-semibold text-gray-600 mb-2">오늘의 팁</h2>
+            <button
+              onClick={() => useQAStore.getState().setSelectedItem(todayTip)}
+              className="w-full bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-100 rounded-2xl p-4 text-left active:scale-[0.98] transition-transform"
+            >
+              <div className="text-xs text-orange-500 font-medium mb-1">💡 {todayTip.category}</div>
+              <div className="text-sm font-semibold text-gray-800 mb-1">{todayTip.question}</div>
+              <div className="text-xs text-gray-500 line-clamp-2">{todayTip.answer}</div>
+            </button>
+          </div>
 
           {/* 카테고리 빠른 접근 */}
           <h2 className="text-sm font-semibold text-gray-600 mb-3">카테고리별 보기</h2>

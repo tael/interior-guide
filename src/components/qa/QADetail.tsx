@@ -19,6 +19,17 @@ export function QADetail() {
   const category = CATEGORIES.find((c) => c.id === item.category)
   const totalLikes = item.likes + (likesMap[item.id] ?? 0)
 
+  const handleShare = async () => {
+    const url = `https://tael.github.io/interior-guide/#share-${item.id}`
+    const text = `[집수리 가이드] ${item.question}`
+    if (navigator.share) {
+      await navigator.share({ title: text, url })
+    } else {
+      await navigator.clipboard.writeText(`${text}\n${url}`)
+      alert('링크가 복사됐어요!')
+    }
+  }
+
   const handleDelete = () => {
     if (confirm('이 질문을 삭제할까요?')) {
       deleteUserQuestion(item.id)
@@ -98,7 +109,7 @@ export function QADetail() {
         </div>
       )}
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
         <button
           onClick={() => incrementLike(item.id)}
           className="flex items-center gap-1.5 text-sm text-gray-500 bg-gray-50 rounded-full px-4 py-2 active:bg-orange-50 active:text-orange-500 transition-colors"
@@ -110,13 +121,18 @@ export function QADetail() {
           onClick={() => toggleFavorite(item.id)}
           className={clsx(
             'flex items-center gap-1.5 text-sm rounded-full px-4 py-2 transition-colors',
-            isFav
-              ? 'bg-yellow-50 text-yellow-500'
-              : 'bg-gray-50 text-gray-500',
+            isFav ? 'bg-yellow-50 text-yellow-500' : 'bg-gray-50 text-gray-500',
           )}
         >
           <span>{isFav ? '★' : '☆'}</span>
           <span>{isFav ? '저장됨' : '저장'}</span>
+        </button>
+        <button
+          onClick={handleShare}
+          className="flex items-center gap-1.5 text-sm text-gray-500 bg-gray-50 rounded-full px-4 py-2 active:bg-blue-50 active:text-blue-500 transition-colors"
+        >
+          <span>↗️</span>
+          <span>공유</span>
         </button>
       </div>
 
