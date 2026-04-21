@@ -4,6 +4,7 @@ import { KNOWLEDGE_BASE } from '@/constants/knowledgeBase'
 import { useQAStore } from '@/stores/qaStore'
 import { QACard } from '@/components/qa/QACard'
 import { CostCalc } from '@/components/browse/CostCalc'
+import { FutureRoadmap } from '@/components/common/FutureRoadmap'
 import { getItemsByCategory } from '@/utils/search'
 
 export function BrowsePage() {
@@ -65,7 +66,7 @@ export function BrowsePage() {
   return (
     <div className="px-4">
       <CostCalc />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2" role="list" aria-label="카테고리 목록">
         {CATEGORIES.map((cat) => {
           const count = getItemsByCategory(allItems, cat.id).length
           return (
@@ -96,6 +97,7 @@ export function BrowsePage() {
           )
         })}
       </div>
+      <FutureRoadmap />
     </div>
   )
 }
