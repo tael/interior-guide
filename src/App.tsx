@@ -1,5 +1,6 @@
 import { useQAStore } from '@/stores/qaStore'
 import { ErrorBoundary } from '@/components/common/ErrorBoundary'
+import { ScrollToTop } from '@/components/common/ScrollToTop'
 import { Header } from '@/components/layout/Header'
 import { BottomNav } from '@/components/layout/BottomNav'
 import { SearchPage } from '@/components/home/SearchPage'
@@ -33,6 +34,7 @@ export default function App() {
           <main className="pt-14 pb-20 min-h-screen">
             <div className="py-4">{renderPage()}</div>
           </main>
+          <ScrollToTop />
           <BottomNav />
         </div>
       </div>

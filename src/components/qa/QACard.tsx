@@ -2,6 +2,7 @@ import { useQAStore } from '@/stores/qaStore'
 import type { QAItem } from '@/types/qa'
 import clsx from 'clsx'
 import { CATEGORIES } from '@/constants/categories'
+import { highlight } from '@/utils/highlight'
 
 interface Props {
   item: QAItem
@@ -9,7 +10,7 @@ interface Props {
 }
 
 export function QACard({ item, compact = false }: Props) {
-  const { favorites, toggleFavorite, setSelectedItem, likesMap, incrementLike } = useQAStore()
+  const { favorites, toggleFavorite, setSelectedItem, likesMap, incrementLike, searchQuery } = useQAStore()
   const isFav = favorites.includes(item.id)
   const category = CATEGORIES.find((c) => c.id === item.category)
   const totalLikes = item.likes + (likesMap[item.id] ?? 0)
@@ -38,10 +39,14 @@ export function QACard({ item, compact = false }: Props) {
         )}
       </div>
 
-      <h3 className="text-sm font-semibold text-gray-800 leading-snug mb-1">{item.question}</h3>
+      <h3 className="text-sm font-semibold text-gray-800 leading-snug mb-1">
+        {highlight(item.question, searchQuery)}
+      </h3>
 
       {!compact && (
-        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{item.answer}</p>
+        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+          {highlight(item.answer, searchQuery)}
+        </p>
       )}
 
       <div
