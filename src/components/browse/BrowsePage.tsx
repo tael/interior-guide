@@ -8,12 +8,16 @@ import { getItemsByCategory } from '@/utils/search'
 
 export function BrowsePage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [sortBy, setSortBy] = useState<'likes' | 'default'>('likes')
   const { userQuestions } = useQAStore()
 
   const allItems = [...KNOWLEDGE_BASE, ...userQuestions]
 
   if (selectedCategory) {
-    const items = getItemsByCategory(allItems, selectedCategory)
+    const rawItems = getItemsByCategory(allItems, selectedCategory)
+    const items = sortBy === 'likes'
+      ? [...rawItems].sort((a, b) => b.likes - a.likes)
+      : rawItems
     const cat = CATEGORIES.find((c) => c.id === selectedCategory)
 
     return (
@@ -25,12 +29,22 @@ export function BrowsePage() {
           ← 카테고리 목록
         </button>
 
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-2xl">{cat?.icon}</span>
-          <div>
-            <h2 className="text-base font-bold text-gray-800">{cat?.name}</h2>
-            <p className="text-xs text-gray-400">{cat?.description}</p>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">{cat?.icon}</span>
+            <div>
+              <h2 className="text-base font-bold text-gray-800">{cat?.name}</h2>
+              <p className="text-xs text-gray-400">{cat?.description}</p>
+            </div>
           </div>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as 'likes' | 'default')}
+            className="text-xs bg-gray-50 border border-gray-100 rounded-lg px-2 py-1.5 text-gray-600 outline-none"
+          >
+            <option value="likes">인기순</option>
+            <option value="default">기본순</option>
+          </select>
         </div>
 
         {items.length > 0 ? (

@@ -10,7 +10,11 @@ const TABS: { id: TabId; label: string; icon: string }[] = [
 ]
 
 export function BottomNav() {
-  const { activeTab, setActiveTab } = useQAStore()
+  const { activeTab, setActiveTab, favorites, userQuestions } = useQAStore()
+  const badges: Partial<Record<TabId, number>> = {
+    favorites: favorites.length || undefined,
+    add: userQuestions.length || undefined,
+  }
 
   return (
     <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white border-t border-gray-100 shadow-lg z-50">
@@ -26,7 +30,14 @@ export function BottomNav() {
                 : 'text-gray-400',
             )}
           >
-            <span className="text-xl leading-none">{tab.icon}</span>
+            <span className="relative text-xl leading-none">
+              {tab.icon}
+              {badges[tab.id] != null && (
+                <span className="absolute -top-1 -right-2 min-w-[14px] h-[14px] bg-orange-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center px-0.5">
+                  {badges[tab.id]}
+                </span>
+              )}
+            </span>
             <span>{tab.label}</span>
           </button>
         ))}
