@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "project": "집수리 가이드 (interior-guide)",
+  "stories": [
+    {
+      "id": "US-001",
+      "title": "프로젝트 기반 구조",
+      "description": "React+TS+Vite+Tailwind 프로젝트 스캐폴딩",
+      "acceptanceCriteria": [
+        "package.json에 react, zustand, tailwindcss, vite 의존성 존재",
+        "tsconfig.app.json에 strict: true 설정",
+        "vite.config.ts에 base: '/interior-guide/' 설정",
+        "GitHub Actions deploy.yml 존재"
+      ],
+      "passes": true
+    },
+    {
+      "id": "US-002",
+      "title": "지식베이스 데이터",
+      "description": "30개 이상 실용적인 Q&A 데이터",
+      "acceptanceCriteria": [
+        "KNOWLEDGE_BASE 배열에 30개 이상 항목",
+        "각 항목에 id, category, question, answer, tags, relatedLinks, likes 존재",
+        "카테고리 최소 6개 이상 포함",
+        "relatedLinks에 유튜브+블로그 URL 존재",
+        "knowledgeBase.test.ts 모든 테스트 통과"
+      ],
+      "passes": false
+    },
+    {
+      "id": "US-003",
+      "title": "Zustand 스토어 + localStorage",
+      "description": "검색, 즐겨찾기, 사용자 질문 상태 관리",
+      "acceptanceCriteria": [
+        "qaStore.ts에 search, toggleFavorite, addUserQuestion 액션 존재",
+        "favorites와 userQuestions가 localStorage에 저장/복원",
+        "typecheck 통과"
+      ],
+      "passes": false
+    },
+    {
+      "id": "US-004",
+      "title": "모바일 UI 컴포넌트",
+      "description": "4탭 네비게이션, 검색, 카드, 상세보기",
+      "acceptanceCriteria": [
+        "BottomNav 4탭 렌더링",
+        "SearchPage 검색바 + 카테고리 + 인기질문 렌더링",
+        "QACard 질문/답변/좋아요/즐겨찾기 버튼 렌더링",
+        "QADetail 전체 답변 + 관련 링크 렌더링",
+        "BrowsePage 카테고리별 목록 렌더링",
+        "AddPage 폼 검증 동작",
+        "빌드 성공"
+      ],
+      "passes": false
+    },
+    {
+      "id": "US-005",
+      "title": "GitHub 레포 + Pages 배포",
+      "description": "공개 GitHub 레포 생성 및 접근 가능 URL",
+      "acceptanceCriteria": [
+        "GitHub 레포 tael/interior-guide 생성",
+        "main 브랜치에 코드 push",
+        "GitHub Pages 활성화",
+        "https://tael.github.io/interior-guide/ 접근 가능"
+      ],
+      "passes": false
+    }
+  ]
+}

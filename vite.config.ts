@@ -1,0 +1,20 @@
+/// <reference types="vitest" />
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import { resolve } from 'path'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  base: '/interior-guide/',
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
+  },
+  test: {
+    environment: 'happy-dom',
+    setupFiles: ['./src/test/setup.ts'],
+    globals: true,
+  },
+})

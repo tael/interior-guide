@@ -1,0 +1,134 @@
+import { useQAStore } from '@/stores/qaStore'
+import { QACard } from '@/components/qa/QACard'
+import { KNOWLEDGE_BASE } from '@/constants/knowledgeBase'
+import { CATEGORIES } from '@/constants/categories'
+import { getFeaturedItems } from '@/utils/search'
+import { useRef } from 'react'
+
+export function SearchPage() {
+  const { searchQuery, searchResults, search, clearSearch, setActiveTab, setSelectedItem } =
+    useQAStore()
+  const inputRef = useRef<HTMLInputElement>(null)
+  const featured = getFeaturedItems(KNOWLEDGE_BASE)
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const q = e.target.value
+    if (q.trim()) {
+      search(q)
+    } else {
+      clearSearch()
+    }
+  }
+
+  const handleCategoryClick = (categoryId: string) => {
+    const item = KNOWLEDGE_BASE.find((i) => i.category === categoryId)
+    if (item) {
+      setActiveTab('browse')
+    }
+  }
+
+  return (
+    <div>
+      {/* 검색 바 */}
+      <div className="px-4 pb-4">
+        <div className="relative">
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+          <input
+            ref={inputRef}
+            type="search"
+            value={searchQuery}
+            onChange={handleSearch}
+            placeholder="도배, 샤시, 화장실 비용... 뭐든 물어보세요"
+            className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all placeholder-gray-400"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => {
+                clearSearch()
+                inputRef.current?.focus()
+              }}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-lg leading-none"
+            >
+              ×
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* 검색 결과 */}
+      {searchQuery && (
+        <div className="px-4">
+          {searchResults.length > 0 ? (
+            <>
+              <p className="text-xs text-gray-400 mb-3">
+                "{searchQuery}" 검색 결과 {searchResults.length}개
+              </p>
+              <div className="flex flex-col gap-3">
+                {searchResults.map((item) => (
+                  <QACard key={item.id} item={item} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-4xl mb-3">🤔</div>
+              <p className="text-sm text-gray-500 mb-1">"{searchQuery}"에 대한 정보가 없어요</p>
+              <p className="text-xs text-gray-400">
+                질문 추가 탭에서 직접 추가해보세요!
+              </p>
+              <button
+                onClick={() => {
+                  useQAStore.getState().setActiveTab('add')
+                }}
+                className="mt-4 px-5 py-2 bg-orange-500 text-white text-sm rounded-full"
+              >
+                질문 추가하기
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 기본 화면 (검색어 없을 때) */}
+      {!searchQuery && (
+        <div className="px-4">
+          {/* 카테고리 빠른 접근 */}
+          <h2 className="text-sm font-semibold text-gray-600 mb-3">카테고리별 보기</h2>
+          <div className="grid grid-cols-5 gap-2 mb-6">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => handleCategoryClick(cat.id)}
+                className="flex flex-col items-center gap-1 active:opacity-70 transition-opacity"
+              >
+                <div
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-sm"
+                  style={{ backgroundColor: cat.color + '15' }}
+                >
+                  {cat.icon}
+                </div>
+                <span className="text-xs text-gray-500 text-center leading-tight">{cat.name}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* 인기 질문 */}
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-gray-600">자주 묻는 질문</h2>
+            <button
+              onClick={() => setSelectedItem(null)}
+              className="text-xs text-orange-500"
+            >
+              전체보기
+            </button>
+          </div>
+          <div className="flex flex-col gap-3">
+            {featured.slice(0, 6).map((item) => (
+              <QACard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
