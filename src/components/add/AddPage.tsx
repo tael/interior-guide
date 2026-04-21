@@ -50,7 +50,7 @@ export function AddPage() {
         <div className="flex gap-3">
           <button
             onClick={() => {
-              setForm({ category: '', question: '', answer: '', tags: '' })
+              setForm({ category: '', question: '', answer: '', tags: '', linkUrl: '', linkTitle: '' })
               setSubmitted(false)
             }}
             className="px-5 py-2.5 bg-gray-100 text-gray-600 text-sm rounded-full"

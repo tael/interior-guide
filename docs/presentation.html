@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>집수리 가이드 — 발표자료</title>
+<style>
+  :root {
+    --primary: #FF6B35;
+    --primary-light: #FFF3EE;
+    --secondary: #2EC4B6;
+    --dark: #1A1A2E;
+    --gray: #6B7280;
+    --light: #F9FAFB;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #0F0F1A;
+    color: #fff;
+    overflow: hidden;
+  }
+  .deck { width: 100vw; height: 100vh; position: relative; }
+  .slide {
+    display: none;
+    width: 100%; height: 100%;
+    position: absolute; top: 0; left: 0;
+    padding: 60px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide.active { display: flex; }
+  .slide-number {
+    position: fixed; bottom: 24px; right: 32px;
+    font-size: 13px; color: rgba(255,255,255,0.3);
+  }
+  nav {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 16px; z-index: 100;
+  }
+  nav button {
+    padding: 10px 28px; border-radius: 50px; border: none; cursor: pointer;
+    font-size: 14px; font-family: inherit; font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-prev { background: rgba(255,255,255,0.1); color: #fff; }
+  .btn-next { background: var(--primary); color: #fff; }
+  nav button:hover { opacity: 0.85; transform: scale(1.03); }
+  nav button:disabled { opacity: 0.3; cursor: default; }
+
+  /* Typography */
+  .tag {
+    display: inline-block; font-size: 12px; font-weight: 600;
+    padding: 4px 12px; border-radius: 50px;
+    background: var(--primary); color: #fff; margin-bottom: 16px;
+  }
+  h1 { font-size: 56px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+  h2 { font-size: 38px; font-weight: 700; margin-bottom: 12px; }
+  h3 { font-size: 22px; font-weight: 600; color: rgba(255,255,255,0.85); }
+  p { font-size: 18px; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 680px; }
+  .accent { color: var(--primary); }
+  .teal { color: var(--secondary); }
+
+  /* Cards */
+  .card-grid { display: grid; gap: 16px; }
+  .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 20px 24px;
+  }
+  .card-icon { font-size: 28px; margin-bottom: 10px; }
+  .card h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .card p { font-size: 14px; color: rgba(255,255,255,0.55); max-width: none; }
+  .card.highlight { background: rgba(255,107,53,0.12); border-color: rgba(255,107,53,0.3); }
+  .card.teal-card { background: rgba(46,196,182,0.12); border-color: rgba(46,196,182,0.3); }
+
+  /* Stat */
+  .stat { text-align: center; }
+  .stat .number { font-size: 52px; font-weight: 800; color: var(--primary); }
+  .stat .label { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* List */
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .check-list li { font-size: 17px; color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 12px; }
+  .check-list li::before { content: '✓'; color: var(--secondary); font-weight: 700; }
+
+  /* Problem quote */
+  .quote {
+    background: rgba(255,255,255,0.05); border-left: 4px solid var(--primary);
+    border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 16px 0;
+    font-size: 17px; color: rgba(255,255,255,0.75); font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Tech stack table */
+  .stack-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 15px;
+  }
+  .stack-row:last-child { border-bottom: none; }
+  .stack-tech { font-weight: 600; width: 160px; color: var(--primary); }
+  .stack-desc { color: rgba(255,255,255,0.6); }
+
+  /* Roadmap */
+  .roadmap { display: flex; flex-direction: column; gap: 12px; }
+  .rm-row { display: flex; align-items: center; gap: 16px; }
+  .rm-version {
+    width: 80px; text-align: center; padding: 6px 0;
+    border-radius: 8px; font-size: 13px; font-weight: 700;
+    background: rgba(255,107,53,0.2); color: var(--primary); flex-shrink: 0;
+  }
+  .rm-version.done { background: rgba(46,196,182,0.2); color: var(--secondary); }
+  .rm-desc { font-size: 15px; color: rgba(255,255,255,0.7); }
+
+  /* Slide backgrounds */
+  .slide-title { background: linear-gradient(135deg, #1A0A28 0%, #0F0F2A 100%); }
+  .slide-problem { background: linear-gradient(135deg, #1A0A0A 0%, #0F0F1A 100%); }
+  .slide-solution { background: linear-gradient(135deg, #0A1A18 0%, #0F0F1A 100%); }
+  .slide-feature { background: linear-gradient(135deg, #1A100A 0%, #0F0F1A 100%); }
+  .slide-tech { background: linear-gradient(135deg, #0A0A1A 0%, #0F0F1A 100%); }
+  .slide-demo { background: linear-gradient(135deg, #101A1A 0%, #0F0F1A 100%); }
+  .slide-roadmap { background: linear-gradient(135deg, #1A1A0A 0%, #0F0F1A 100%); }
+  .slide-close { background: linear-gradient(135deg, #1A0A1A 0%, #0F0F1A 100%); }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- 슬라이드 1: 타이틀 -->
+  <section class="slide slide-title active" id="s1">
+    <div class="tag">집수리 가이드 v0.1.0</div>
+    <h1>집수리할 때<br/><span class="accent">뭘 모르는지도</span><br/>모를 때</h1>
+    <p>인테리어·집수리 궁금증을 한 곳에서 해결하는 모바일 Q&amp;A 앱</p>
+    <div style="margin-top:40px; display:flex; gap:20px; align-items:center;">
+      <a href="https://tael.github.io/interior-guide/" target="_blank"
+         style="display:inline-block; padding:14px 28px; background:var(--primary); color:#fff;
+                border-radius:50px; text-decoration:none; font-weight:600; font-size:16px;">
+        🏠 지금 사용해보기
+      </a>
+      <span style="color:rgba(255,255,255,0.4); font-size:14px;">tael.github.io/interior-guide</span>
+    </div>
+  </section>
+
+  <!-- 슬라이드 2: 문제 -->
+  <section class="slide slide-problem" id="s2">
+    <div class="tag">문제 정의</div>
+    <h2>당근마켓 "인테리어 배우기"<br/>에서 매일 반복되는 일</h2>
+    <div class="quote">"도배 비용이 얼마에요?" — 같은 질문이 하루에도 3번씩</div>
+    <div class="quote">"인터넷에 다 나와 있는데 왜 여기서 물어봐요" — 짜증난 답변자</div>
+    <div class="quote">"견적 받았는데 바가지인지 어떻게 알아요?" — 불안한 집주인</div>
+    <p style="margin-top:24px;">정보는 인터넷에 있지만 <span class="accent">모아져 있지 않고</span>, 신뢰할 수 있는지도 <span class="accent">알 수 없는</span> 상황</p>
+  </section>
+
+  <!-- 슬라이드 3: 솔루션 -->
+  <section class="slide slide-solution" id="s3">
+    <div class="tag">솔루션</div>
+    <h2>정보를 모으고,<br/><span class="accent">검색하면 바로 나오게</span></h2>
+    <div class="card-grid cols-3" style="margin-top:32px;">
+      <div class="card highlight">
+        <div class="card-icon">🔍</div>
+        <h4>즉각 검색</h4>
+        <p>도배·화장실·샤시 등 키워드로 바로 답변 + 관련 유튜브/블로그 링크</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧮</div>
+        <h4>비용 계산</h4>
+        <p>면적 입력하면 공사 종류별 예상 비용 범위 자동 계산</p>
+      </div>
+      <div class="card teal-card">
+        <div class="card-icon">✏️</div>
+        <h4>정보 축적</h4>
+        <p>누구나 아는 정보 추가 → 쌓일수록 더 좋아지는 커뮤니티 지식</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 슬라이드 4: 핵심 기능 -->
+  <section class="slide slide-feature" id="s4">
+    <div class="tag">핵심 기능</div>
+    <h2>v0.1 구현된 기능</h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:24px;">
+      <ul class="check-list">
+        <li>30개+ Q&amp;A 지식베이스 (10개 카테고리)</li>
+        <li>키워드 검색 + 결과 하이라이팅</li>
+        <li>최근 검색어 + 태그 자동완성</li>
+        <li>오늘의 팁 (날짜 기반 추천)</li>
+        <li>관련 유튜브·블로그 링크</li>
+      </ul>
+      <ul class="check-list">
+        <li>공사 비용 간단 계산기</li>
+        <li>즐겨찾기 + 내 질문 추가</li>
+        <li>데이터 JSON 내보내기/가져오기</li>
+        <li>🥇🥈🥉 인기 순위 뱃지</li>
+        <li>공유하기 (Web Share API)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 슬라이드 5: 숫자 -->
+  <section class="slide slide-tech" id="s5">
+    <div class="tag">현황</div>
+    <h2>v0.1 주요 지표</h2>
+    <div class="card-grid cols-3" style="margin-top:36px;">
+      <div class="stat">
+        <div class="number">30+</div>
+        <div class="label">Q&amp;A 항목</div>
+      </div>
+      <div class="stat">
+        <div class="number">10</div>
+        <div class="label">카테고리</div>
+      </div>
+      <div class="stat">
+        <div class="number">79KB</div>
+        <div class="label">gzip 번들 크기</div>
+      </div>
+      <div class="stat">
+        <div class="number">10/10</div>
+        <div class="label">테스트 통과</div>
+      </div>
+      <div class="stat">
+        <div class="number">0</div>
+        <div class="label">서버 비용</div>
+      </div>
+      <div class="stat">
+        <div class="number accent">20</div>
+        <div class="label">개선 커밋</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 슬라이드 6: 기술 스택 -->
+  <section class="slide slide-tech" id="s6">
+    <div class="tag">기술 스택</div>
+    <h2>클라이언트 전용 — 서버 비용 0원</h2>
+    <div style="margin-top:28px;">
+      <div class="stack-row"><span class="stack-tech">React 19 + TS</span><span class="stack-desc">Concurrent Mode, 최신 훅 지원</span></div>
+      <div class="stack-row"><span class="stack-tech">Vite 6</span><span class="stack-desc">빠른 빌드, ESM 네이티브 (79KB gzip)</span></div>
+      <div class="stack-row"><span class="stack-tech">Tailwind CSS v4</span><span class="stack-desc">유틸리티 퍼스트, 자동 트리쉐이킹</span></div>
+      <div class="stack-row"><span class="stack-tech">Zustand 5</span><span class="stack-desc">보일러플레이트 없는 경량 상태관리</span></div>
+      <div class="stack-row"><span class="stack-tech">localStorage</span><span class="stack-desc">즐겨찾기·내질문·검색기록 영속성</span></div>
+      <div class="stack-row"><span class="stack-tech">GitHub Pages</span><span class="stack-desc">Actions CI → 자동 배포</span></div>
+    </div>
+  </section>
+
+  <!-- 슬라이드 7: 데모 -->
+  <section class="slide slide-demo" id="s7">
+    <div class="tag">데모</div>
+    <h2>지금 바로 사용해보세요</h2>
+    <div class="card-grid cols-2" style="margin-top:32px;">
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h4>모바일 접속</h4>
+        <p style="font-size:20px; font-weight:700; color:var(--primary); margin-top:8px;">tael.github.io<br/>/interior-guide/</p>
+      </div>
+      <div class="card highlight">
+        <div class="card-icon">🔍</div>
+        <h4>검색해보기</h4>
+        <p>도배, 화장실, 샤시, 마루, 누수, 페인트...</p>
+        <p style="margin-top:8px; font-size:13px;">비용 계산기는 "둘러보기" 탭에서</p>
+      </div>
+    </div>
+    <p style="margin-top:32px; font-size:15px; color:rgba(255,255,255,0.4);">
+      홈화면에 추가하면 앱처럼 사용 가능 (PWA)
+    </p>
+  </section>
+
+  <!-- 슬라이드 8: 로드맵 -->
+  <section class="slide slide-roadmap" id="s8">
+    <div class="tag">로드맵</div>
+    <h2>앞으로의 방향</h2>
+    <div class="roadmap" style="margin-top:32px;">
+      <div class="rm-row">
+        <div class="rm-version done">v0.1 ✓</div>
+        <div class="rm-desc">기본 Q&amp;A 검색, 카테고리, 즐겨찾기, 질문 추가, 비용 계산기</div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-version">v0.2</div>
+        <div class="rm-desc"><span class="accent">AI 답변 연동</span> — Claude API로 실시간 모호한 질문 처리</div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-version">v0.3</div>
+        <div class="rm-desc"><span class="teal">커뮤니티 공유</span> — 내 질문을 모두와 공유, 실시간 축적</div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-version">v1.0</div>
+        <div class="rm-desc">지역 업체 정보 + 시공 사진 + 크롤링 자동화</div>
+      </div>
+    </div>
+    <p style="margin-top:32px;">
+      현재 한계: 서버 없이 AI·공유·자동수집 불가 →
+      <span class="accent">클라이언트에서 할 수 있는 최선</span>을 먼저 만들고 확장
+    </p>
+  </section>
+
+  <!-- 슬라이드 9: 마무리 -->
+  <section class="slide slide-close" id="s9">
+    <div class="tag">마무리</div>
+    <h1>"모든 질문이<br/><span class="accent">가치 있는 정보다"</span></h1>
+    <p style="margin-top:16px; font-size:20px;">
+      당근마켓에서 반복되는 집수리 질문들 —<br/>
+      그 하나하나가 모이면 커뮤니티의 지식이 됩니다.
+    </p>
+    <div style="margin-top:40px; display:flex; gap:20px; flex-wrap:wrap;">
+      <a href="https://tael.github.io/interior-guide/" target="_blank"
+         style="display:inline-block; padding:14px 28px; background:var(--primary); color:#fff;
+                border-radius:50px; text-decoration:none; font-weight:600; font-size:16px;">
+        🏠 집수리 가이드 열기
+      </a>
+      <a href="https://github.com/tael/interior-guide" target="_blank"
+         style="display:inline-block; padding:14px 28px; background:rgba(255,255,255,0.1); color:#fff;
+                border-radius:50px; text-decoration:none; font-weight:600; font-size:16px;">
+        GitHub →
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<div class="slide-number" id="slideNum">1 / 9</div>
+<nav>
+  <button class="btn-prev" id="prevBtn" onclick="move(-1)" disabled>← 이전</button>
+  <button class="btn-next" id="nextBtn" onclick="move(1)">다음 →</button>
+</nav>
+
+<script>
+  let current = 1;
+  const total = 9;
+
+  function move(dir) {
+    document.getElementById('s' + current).classList.remove('active');
+    current = Math.max(1, Math.min(total, current + dir));
+    document.getElementById('s' + current).classList.add('active');
+    document.getElementById('slideNum').textContent = current + ' / ' + total;
+    document.getElementById('prevBtn').disabled = current === 1;
+    document.getElementById('nextBtn').disabled = current === total;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') move(1);
+    if (e.key === 'ArrowLeft') move(-1);
+  });
+</script>
+</body>
+</html>
