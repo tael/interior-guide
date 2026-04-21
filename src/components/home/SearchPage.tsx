@@ -10,6 +10,10 @@ function getTodayTip() {
   return KNOWLEDGE_BASE[dayIndex]
 }
 
+const ALL_TAGS = Array.from(
+  new Set(KNOWLEDGE_BASE.flatMap((item) => item.tags))
+).sort()
+
 export function SearchPage() {
   const { searchQuery, searchResults, search, clearSearch, setActiveTab, setSelectedItem, recentSearches, clearRecentSearches } =
     useQAStore()
@@ -60,6 +64,24 @@ export function SearchPage() {
           )}
         </div>
       </div>
+
+      {/* 태그 자동완성 */}
+      {searchQuery && searchQuery.length >= 1 && searchResults.length === 0 && (() => {
+        const suggestions = ALL_TAGS.filter((t) => t.includes(searchQuery)).slice(0, 5)
+        return suggestions.length > 0 ? (
+          <div className="px-4 mb-3 flex flex-wrap gap-2">
+            {suggestions.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => search(tag)}
+                className="text-xs bg-orange-50 text-orange-600 px-3 py-1.5 rounded-full border border-orange-100"
+              >
+                #{tag}
+              </button>
+            ))}
+          </div>
+        ) : null
+      })()}
 
       {/* 검색 결과 */}
       {searchQuery && (

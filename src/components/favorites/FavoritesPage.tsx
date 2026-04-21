@@ -47,9 +47,29 @@ export function FavoritesPage() {
     </div>
   )
 
-  if (favItems.length === 0) {
-    return (
-      <div className="px-4">
+  return (
+    <div className="px-4">
+      {userQuestions.length > 0 && (
+        <div className="mb-5">
+          <h3 className="text-xs font-semibold text-blue-600 mb-2">내가 추가한 질문 {userQuestions.length}개</h3>
+          <div className="flex flex-col gap-2">
+            {userQuestions.map((item) => (
+              <QACard key={item.id} item={item} compact />
+            ))}
+          </div>
+        </div>
+      )}
+      {favItems.length > 0 && (
+        <>
+          <p className="text-xs text-gray-400 mb-3">즐겨찾기 {favItems.length}개</p>
+          <div className="flex flex-col gap-3">
+            {favItems.map((item) => (
+              <QACard key={item.id} item={item} />
+            ))}
+          </div>
+        </>
+      )}
+      {userQuestions.length === 0 && favItems.length === 0 && (
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <div className="text-5xl mb-4">⭐</div>
           <h3 className="text-base font-semibold text-gray-700 mb-2">저장한 질문이 없어요</h3>
@@ -59,19 +79,7 @@ export function FavoritesPage() {
             ★ 버튼을 눌러 저장해보세요
           </p>
         </div>
-        {dataControls}
-      </div>
-    )
-  }
-
-  return (
-    <div className="px-4">
-      <p className="text-xs text-gray-400 mb-3">{favItems.length}개 저장됨</p>
-      <div className="flex flex-col gap-3">
-        {favItems.map((item) => (
-          <QACard key={item.id} item={item} />
-        ))}
-      </div>
+      )}
       {dataControls}
     </div>
   )
