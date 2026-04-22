@@ -1,18 +1,33 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css');
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --naver-green: #03C75A;
-    --naver-green-dark: #02A549;
-    --naver-green-light: #E5F9EE;
-    --text-primary: #222222;
-    --text-secondary: #555555;
-    --text-tertiary: #999999;
-    --border: #EBEBEB;
-    --border-strong: #CCCCCC;
-    --bg-base: #F5F5F5;
+    /* Primary */
+    --primary: #00A35C;
+    --primary-hover: #008E50;
+    --primary-bg: #E6F5EC;
+
+    /* Grayscale (토스 스타일) */
+    --gray-900: #191F28;
+    --gray-800: #333D4B;
+    --gray-700: #4E5968;
+    --gray-600: #8B95A1;
+    --gray-500: #B0B8C1;
+    --gray-400: #C9CDD2;
+    --gray-300: #D1D6DB;
+    --gray-200: #E5E8EB;
+    --gray-100: #F2F4F6;
+    --gray-50:  #F7F8FA;
+
+    /* Surfaces */
+    --bg: #F7F8FA;
     --bg-card: #FFFFFF;
-    --shadow-card: 0 1px 3px rgba(0,0,0,0.08);
+    --border: #E5E8EB;
+
+    /* Shadow */
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-sticky: 0 4px 12px rgba(0,0,0,0.04);
   }
 
   * {
@@ -23,30 +38,24 @@
   html, body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo',
-      'Noto Sans KR', sans-serif;
-    background-color: #F5F5F5;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+      'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background-color: #F7F8FA;
+    color: #191F28;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.015em;
+  }
+
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, p {
+    word-break: keep-all;
   }
 
   input[type="search"]::-webkit-search-cancel-button {
     display: none;
-  }
-
-  button {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  a {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  h1, h2, h3, h4 {
-    word-break: keep-all;
-  }
-
-  p {
-    word-break: keep-all;
   }
 }
 
@@ -77,4 +86,10 @@
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* 타이포 토큰 */
+  .type-h1 { font-size: 20px; font-weight: 700; line-height: 1.4; letter-spacing: -0.02em; }
+  .type-h2 { font-size: 16px; font-weight: 600; line-height: 1.4; }
+  .type-b1 { font-size: 14px; font-weight: 400; line-height: 1.5; }
+  .type-c1 { font-size: 12px; font-weight: 500; line-height: 1.3; }
 }

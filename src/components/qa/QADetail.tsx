@@ -1,7 +1,7 @@
 import { useQAStore } from '@/stores/qaStore'
-import { CATEGORIES } from '@/constants/categories'
 import { KNOWLEDGE_BASE } from '@/constants/knowledgeBase'
 import clsx from 'clsx'
+import { Bookmark, ThumbsUp, Share2, Lightbulb } from 'lucide-react'
 
 export function QADetail() {
   const { selectedItem, favorites, toggleFavorite, deleteUserQuestion, setSelectedItem, setActiveTab, search, likesMap, incrementLike, userQuestions } =
@@ -17,7 +17,6 @@ export function QADetail() {
 
   const item = selectedItem
   const isFav = favorites.includes(item.id)
-  const category = CATEGORIES.find((c) => c.id === item.category)
   const totalLikes = item.likes + (likesMap[item.id] ?? 0)
 
   const allItems = [...KNOWLEDGE_BASE, ...userQuestions]
@@ -53,32 +52,31 @@ export function QADetail() {
   return (
     <div className="pb-6">
       <div className="flex items-center gap-2 mb-4">
-        <span
-          className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full font-medium"
-          style={{ backgroundColor: category?.color + '20', color: category?.color }}
-        >
-          {category?.icon} {item.category}
+        <span className="text-[11px] text-[#4E5968] bg-[#F2F4F6] px-2.5 py-1 rounded font-medium">
+          {item.category}
         </span>
         {item.isFeatured && (
-          <span className="text-xs bg-[#E5F9EE] text-[#03C75A] px-2.5 py-1 rounded-full font-medium">
+          <span className="text-[11px] bg-[#F2F4F6] text-[#4E5968] px-2.5 py-1 rounded font-medium">
             인기 질문
           </span>
         )}
         {item.isUserAdded && (
-          <span className="text-xs bg-blue-50 text-blue-500 px-2.5 py-1 rounded-full font-medium">
+          <span className="text-[11px] bg-[#F2F4F6] text-[#4E5968] px-2.5 py-1 rounded font-medium">
             내가 추가
           </span>
         )}
       </div>
 
-      <h2 className="text-lg font-bold text-gray-800 leading-snug mb-5">{item.question}</h2>
+      <h2 className="text-[20px] font-bold text-[#191F28] leading-tight tracking-tight mb-5">{item.question}</h2>
 
-      <div className="bg-white border border-[#03C75A]/20 rounded-xl p-4 mb-5">
-        <div className="flex items-center gap-1.5 mb-2">
-          <span className="text-base">💡</span>
-          <span className="text-sm font-semibold text-[#03C75A] font-bold">답변</span>
+      <div className="bg-white border border-[#E5E8EB] rounded-xl p-4 mb-6">
+        <div className="flex items-center gap-1.5 mb-2.5">
+          <div className="w-5 h-5 rounded-full bg-[#E6F5EC] flex items-center justify-center">
+            <Lightbulb className="w-3 h-3 text-[#00A35C]" strokeWidth={2.5}/>
+          </div>
+          <span className="text-[13px] font-semibold text-[#00A35C]">답변</span>
         </div>
-        <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{item.answer}</p>
+        <p className="text-[14px] text-[#333D4B] leading-relaxed whitespace-pre-line">{item.answer}</p>
       </div>
 
       {item.relatedLinks.length > 0 && (
@@ -91,11 +89,11 @@ export function QADetail() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-white border border-[#EBEBEB] rounded-lg px-3 py-2.5 text-sm text-[#222222] active:bg-[#E5F9EE] active:text-[#03C75A]"
+                className="flex items-center gap-2 bg-white border border-[#E5E8EB] rounded-lg px-3 py-2.5 text-sm text-[#191F28] active:bg-[#E6F5EC] active:text-[#00A35C]"
               >
                 <span className="text-base">{linkIcon(link.type)}</span>
                 <span className="flex-1 truncate">{link.title}</span>
-                <span className="text-[#03C75A] text-xs font-bold">→</span>
+                <span className="text-[#00A35C] text-xs font-bold">→</span>
               </a>
             ))}
           </div>
@@ -108,7 +106,7 @@ export function QADetail() {
             <button
               key={tag}
               onClick={() => handleTagClick(tag)}
-              className="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full active:bg-[#E5F9EE] active:text-[#02A549] transition-colors"
+              className="text-[12px] bg-[#F2F4F6] text-[#4E5968] px-3 py-1.5 rounded-full font-medium active:bg-[#E6F5EC] active:text-[#00A35C]"
             >
               #{tag}
             </button>
@@ -124,7 +122,7 @@ export function QADetail() {
               <button
                 key={related.id}
                 onClick={() => setSelectedItem(related)}
-                className="text-left bg-gray-50 rounded-xl px-3 py-2.5 text-xs text-gray-600 active:bg-[#E5F9EE] active:text-[#02A549] transition-colors"
+                className="text-left bg-[#F7F8FA] rounded-xl px-3 py-2.5 text-xs text-[#4E5968] active:bg-[#E6F5EC] active:text-[#00A35C] transition-colors"
               >
                 → {related.question}
               </button>
@@ -133,30 +131,29 @@ export function QADetail() {
         </div>
       )}
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 pt-4 border-t border-[#E5E8EB]">
         <button
           onClick={() => incrementLike(item.id)}
-          className="flex items-center gap-1.5 text-sm text-gray-500 bg-white border border-[#EBEBEB] rounded-full px-4 py-2 active:bg-[#E5F9EE] active:text-[#03C75A] transition-colors"
+          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#F2F4F6] rounded-lg text-[13px] text-[#4E5968] font-medium active:bg-[#E6F5EC] active:text-[#00A35C]"
         >
-          <span>👍</span>
+          <ThumbsUp className="w-4 h-4" strokeWidth={2}/>
           <span>도움됐어요 {totalLikes}</span>
         </button>
         <button
           onClick={() => toggleFavorite(item.id)}
           className={clsx(
-            'flex items-center gap-1.5 text-sm rounded-full px-4 py-2 transition-colors',
-            isFav ? 'bg-yellow-50 border border-yellow-200 text-yellow-500' : 'bg-white border border-[#EBEBEB] text-[#555555]',
+            'flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-[13px] font-medium',
+            isFav ? 'bg-[#E6F5EC] text-[#00A35C]' : 'bg-[#F2F4F6] text-[#4E5968]',
           )}
         >
-          <span>{isFav ? '★' : '☆'}</span>
+          <Bookmark className={clsx("w-4 h-4", isFav && "fill-[#00A35C]")} strokeWidth={2}/>
           <span>{isFav ? '저장됨' : '저장'}</span>
         </button>
         <button
           onClick={handleShare}
-          className="flex items-center gap-1.5 text-sm text-gray-500 bg-white border border-[#EBEBEB] rounded-full px-4 py-2 active:bg-blue-50 active:text-blue-500 transition-colors"
+          className="w-11 h-11 flex items-center justify-center bg-[#F2F4F6] rounded-lg text-[#4E5968] active:bg-[#E5E8EB]"
         >
-          <span>↗️</span>
-          <span>공유</span>
+          <Share2 className="w-4 h-4" strokeWidth={2}/>
         </button>
       </div>
 

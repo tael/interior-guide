@@ -3,6 +3,7 @@ import { useQAStore } from '@/stores/qaStore'
 import { KNOWLEDGE_BASE } from '@/constants/knowledgeBase'
 import { QACard } from '@/components/qa/QACard'
 import { exportData, parseImportData } from '@/utils/exportImport'
+import { Bookmark } from 'lucide-react'
 
 export function FavoritesPage() {
   const { favorites, userQuestions, likesMap, importData, setActiveTab } = useQAStore()
@@ -71,18 +72,18 @@ export function FavoritesPage() {
       )}
       {userQuestions.length === 0 && favItems.length === 0 && (
         <div className="flex flex-col items-center justify-center py-16 text-center">
-          <div className="w-20 h-20 rounded-full bg-[#E5F9EE] flex items-center justify-center text-4xl mb-4">
-            ⭐
+          <div className="w-20 h-20 rounded-full bg-[#E6F5EC] flex items-center justify-center mb-4">
+            <Bookmark className="w-8 h-8 text-[#00A35C]" />
           </div>
-          <h3 className="text-base font-bold text-[#222222] mb-2">저장한 질문이 없어요</h3>
-          <p className="text-sm text-[#777777] leading-relaxed mb-4">
+          <h3 className="text-base font-bold text-[#191F28] mb-2">저장한 질문이 없어요</h3>
+          <p className="text-sm text-[#8B95A1] leading-relaxed mb-4">
             자주 참고하고 싶은 답변의
             <br />
-            ★ 버튼을 눌러 저장해보세요
+            북마크 버튼을 눌러 저장해보세요
           </p>
           <button
             onClick={() => setActiveTab('search')}
-            className="px-6 py-2.5 bg-[#03C75A] text-white text-sm font-semibold rounded-full"
+            className="px-6 py-2.5 bg-[#00A35C] text-white text-sm font-semibold rounded-full"
           >
             인기 질문 보러가기
           </button>
