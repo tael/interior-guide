@@ -84,7 +84,7 @@ export function QACard({ item, compact = false, rank }: Props) {
           onClick={() => toggleFavorite(item.id)}
           className={clsx(
             'text-lg transition-transform active:scale-125',
-            isFav ? 'text-[#03C75A]' : 'text-gray-200',
+            isFav ? 'text-yellow-400' : 'text-[#CCCCCC]',
           )}
           aria-label={isFav ? '즐겨찾기 해제' : '즐겨찾기 추가'}
         >

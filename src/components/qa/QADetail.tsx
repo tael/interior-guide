@@ -91,11 +91,11 @@ export function QADetail() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-white border border-gray-100 rounded-xl px-3 py-2.5 text-sm text-gray-700 active:bg-gray-50 shadow-sm"
+                className="flex items-center gap-2 bg-white border border-[#EBEBEB] rounded-lg px-3 py-2.5 text-sm text-[#222222] active:bg-[#E5F9EE] active:text-[#03C75A]"
               >
                 <span className="text-base">{linkIcon(link.type)}</span>
                 <span className="flex-1 truncate">{link.title}</span>
-                <span className="text-gray-300 text-xs">→</span>
+                <span className="text-[#03C75A] text-xs font-bold">→</span>
               </a>
             ))}
           </div>

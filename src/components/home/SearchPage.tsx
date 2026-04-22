@@ -146,9 +146,9 @@ export function SearchPage() {
             <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A] mb-2">오늘의 팁</h2>
             <button
               onClick={() => setSelectedItem(todayTip)}
-              className="w-full bg-gradient-to-r from-[#E5F9EE] to-[#F0FFF8] border border-[#EBEBEB] rounded-2xl p-4 text-left active:scale-[0.98] transition-transform"
+              className="w-full bg-white border border-[#EBEBEB] border-l-[4px] border-l-[#03C75A] rounded-xl p-4 text-left active:scale-[0.98] transition-transform"
             >
-              <div className="text-xs text-[#03C75A] font-medium mb-1">💡 {todayTip.category}</div>
+              <div className="text-[10px] font-bold text-[#03C75A] uppercase tracking-wide mb-1">💡 {todayTip.category}</div>
               <div className="text-sm font-semibold text-gray-800 mb-1">{todayTip.question}</div>
               <div className="text-xs text-gray-500 line-clamp-2">{todayTip.answer}</div>
             </button>
@@ -179,7 +179,7 @@ export function SearchPage() {
             <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A]">자주 묻는 질문 · 총 {KNOWLEDGE_BASE.length + userQuestions.length}개</h2>
             <button
               onClick={() => setSelectedItem(null)}
-              className="text-xs text-[#03C75A]"
+              className="text-xs text-[#03C75A] font-medium"
             >
               전체보기
             </button>

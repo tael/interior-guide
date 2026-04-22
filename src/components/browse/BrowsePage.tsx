@@ -25,7 +25,7 @@ export function BrowsePage() {
       <div className="px-4">
         <button
           onClick={() => setSelectedCategory(null)}
-          className="flex items-center gap-1.5 text-sm text-gray-500 mb-4 active:opacity-70"
+          className="flex items-center gap-1.5 text-sm text-[#555555] mb-4 active:opacity-70"
         >
           ← 카테고리 목록
         </button>
@@ -41,7 +41,7 @@ export function BrowsePage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as 'likes' | 'default')}
-            className="text-xs bg-gray-50 border border-gray-100 rounded-lg px-2 py-1.5 text-gray-600 outline-none"
+            className="text-xs bg-white border border-[#EBEBEB] rounded-lg px-2 py-1.5 text-[#555555] outline-none focus:border-[#03C75A]"
           >
             <option value="likes">인기순</option>
             <option value="default">기본순</option>
@@ -82,8 +82,8 @@ export function BrowsePage() {
                 {cat.icon}
               </div>
               <div className="flex-1">
-                <div className="text-sm font-semibold text-gray-800">{cat.name}</div>
-                <div className="text-xs text-gray-400">{cat.description}</div>
+                <div className="text-sm font-semibold text-[#222222]">{cat.name}</div>
+                <div className="text-xs text-[#777777]">{cat.description}</div>
               </div>
               <div className="text-right shrink-0">
                 <div className="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-[#555555]">

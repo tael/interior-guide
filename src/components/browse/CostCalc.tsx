@@ -41,7 +41,7 @@ export function CostCalc() {
       {open && (
         <div className="bg-white border border-gray-100 rounded-2xl p-4 mt-2 shadow-sm">
           <div className="mb-3">
-            <label className="text-xs font-medium text-gray-600 block mb-1.5">공사 종류</label>
+            <label className="text-xs font-semibold text-[#222222] block mb-1.5">공사 종류</label>
             <div className="grid grid-cols-3 gap-1.5">
               {WORK_TYPES.map((w) => (
                 <button
@@ -61,7 +61,7 @@ export function CostCalc() {
           </div>
 
           <div className="mb-4">
-            <label className="text-xs font-medium text-gray-600 block mb-1.5">
+            <label className="text-xs font-semibold text-[#222222] block mb-1.5">
               면적 (평)
             </label>
             <input
