@@ -32,7 +32,7 @@ export default function App() {
         <div className="w-full max-w-[430px] relative">
           <Header />
           <main className="pt-14 pb-20 min-h-screen">
-            <div className="py-4">{renderPage()}</div>
+            <div key={activeTab + (selectedItem?.id ?? '')} className="py-4 fade-in">{renderPage()}</div>
           </main>
           <ScrollToTop />
           <BottomNav />

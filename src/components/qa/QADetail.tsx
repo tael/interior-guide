@@ -1,9 +1,10 @@
 import { useQAStore } from '@/stores/qaStore'
 import { CATEGORIES } from '@/constants/categories'
+import { KNOWLEDGE_BASE } from '@/constants/knowledgeBase'
 import clsx from 'clsx'
 
 export function QADetail() {
-  const { selectedItem, favorites, toggleFavorite, deleteUserQuestion, setSelectedItem, setActiveTab, search, likesMap, incrementLike } =
+  const { selectedItem, favorites, toggleFavorite, deleteUserQuestion, setSelectedItem, setActiveTab, search, likesMap, incrementLike, userQuestions } =
     useQAStore()
 
   const handleTagClick = (tag: string) => {
@@ -18,6 +19,12 @@ export function QADetail() {
   const isFav = favorites.includes(item.id)
   const category = CATEGORIES.find((c) => c.id === item.category)
   const totalLikes = item.likes + (likesMap[item.id] ?? 0)
+
+  const allItems = [...KNOWLEDGE_BASE, ...userQuestions]
+  const relatedItems = allItems
+    .filter((i) => i.category === item.category && i.id !== item.id)
+    .sort((a, b) => b.likes - a.likes)
+    .slice(0, 3)
 
   const handleShare = async () => {
     const url = `https://tael.github.io/interior-guide/#share-${item.id}`
@@ -106,6 +113,23 @@ export function QADetail() {
               #{tag}
             </button>
           ))}
+        </div>
+      )}
+
+      {relatedItems.length > 0 && (
+        <div className="mb-5">
+          <h4 className="text-sm font-semibold text-gray-600 mb-2">같은 카테고리 질문</h4>
+          <div className="flex flex-col gap-2">
+            {relatedItems.map((related) => (
+              <button
+                key={related.id}
+                onClick={() => setSelectedItem(related)}
+                className="text-left bg-gray-50 rounded-xl px-3 py-2.5 text-xs text-gray-600 active:bg-orange-50 active:text-orange-600 transition-colors"
+              >
+                → {related.question}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 

@@ -15,7 +15,7 @@ const ALL_TAGS = Array.from(
 ).sort()
 
 export function SearchPage() {
-  const { searchQuery, searchResults, search, clearSearch, setActiveTab, setSelectedItem, recentSearches, clearRecentSearches } =
+  const { searchQuery, searchResults, search, clearSearch, setActiveTab, setSelectedItem, recentSearches, clearRecentSearches, userQuestions } =
     useQAStore()
   const inputRef = useRef<HTMLInputElement>(null)
   const featured = getFeaturedItems(KNOWLEDGE_BASE)
@@ -178,7 +178,7 @@ export function SearchPage() {
 
           {/* 인기 질문 */}
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-semibold text-gray-600">자주 묻는 질문</h2>
+            <h2 className="text-sm font-semibold text-gray-600">자주 묻는 질문 · 총 {KNOWLEDGE_BASE.length + userQuestions.length}개</h2>
             <button
               onClick={() => setSelectedItem(null)}
               className="text-xs text-orange-500"
