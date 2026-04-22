@@ -73,7 +73,7 @@ export function BrowsePage() {
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className="flex items-center gap-3 bg-white rounded-2xl p-4 shadow-sm border border-gray-100 active:scale-[0.98] transition-transform text-left"
+              className="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm border border-gray-100 active:scale-[0.98] transition-transform text-left"
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
@@ -86,10 +86,7 @@ export function BrowsePage() {
                 <div className="text-xs text-gray-400">{cat.description}</div>
               </div>
               <div className="text-right shrink-0">
-                <div
-                  className="text-xs font-semibold px-2 py-0.5 rounded-full"
-                  style={{ backgroundColor: cat.color + '20', color: cat.color }}
-                >
+                <div className="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-[#555555]">
                   {count}개
                 </div>
               </div>

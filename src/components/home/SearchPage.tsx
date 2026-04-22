@@ -99,9 +99,9 @@ export function SearchPage() {
             </>
           ) : (
             <div className="text-center py-12">
-              <div className="text-4xl mb-3">🤔</div>
-              <p className="text-sm text-gray-500 mb-1">"{searchQuery}"에 대한 정보가 없어요</p>
-              <p className="text-xs text-gray-400">
+              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-3xl mb-3 mx-auto">🤔</div>
+              <p className="text-sm text-[#222222] font-semibold mb-1">"{searchQuery}"에 대한 정보가 없어요</p>
+              <p className="text-xs text-[#777777]">
                 질문 추가 탭에서 직접 추가해보세요!
               </p>
               <button

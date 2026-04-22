@@ -73,10 +73,10 @@ export function QADetail() {
 
       <h2 className="text-lg font-bold text-gray-800 leading-snug mb-5">{item.question}</h2>
 
-      <div className="bg-[#E5F9EE] rounded-2xl p-4 mb-5">
+      <div className="bg-white border border-[#03C75A]/20 rounded-xl p-4 mb-5">
         <div className="flex items-center gap-1.5 mb-2">
           <span className="text-base">💡</span>
-          <span className="text-sm font-semibold text-[#02A549]">답변</span>
+          <span className="text-sm font-semibold text-[#03C75A] font-bold">답변</span>
         </div>
         <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{item.answer}</p>
       </div>

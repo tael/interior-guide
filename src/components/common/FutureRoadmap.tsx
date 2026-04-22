@@ -16,20 +16,20 @@ export function FutureRoadmap() {
     <div className="mt-4">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between text-xs text-gray-400 py-2"
+        className="w-full flex items-center justify-between text-xs text-[#555555] py-2 px-3 bg-white border border-[#EBEBEB] rounded-xl"
       >
         <span>🚀 향후 개선 예정 기능</span>
         <span>{open ? '▲' : '▼'}</span>
       </button>
       {open && (
-        <div className="bg-gray-50 rounded-2xl p-3">
+        <div className="bg-white border border-[#EBEBEB] rounded-xl p-3">
           <div className="flex flex-col gap-2">
             {IMPROVEMENTS.map((item) => (
               <div key={item.title} className="flex items-start gap-2">
                 <span className="text-base shrink-0">{item.icon}</span>
                 <div>
-                  <div className="text-xs font-medium text-gray-700">{item.title}</div>
-                  <div className="text-xs text-gray-400">{item.desc}</div>
+                  <div className="text-xs font-medium text-[#222222]">{item.title}</div>
+                  <div className="text-xs text-[#777777]">{item.desc}</div>
                 </div>
               </div>
             ))}

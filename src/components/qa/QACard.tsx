@@ -45,7 +45,7 @@ export function QACard({ item, compact = false, rank }: Props) {
           <span className="text-base leading-none">{RANK_BADGE[rank]}</span>
         )}
         {item.isFeatured && !rank && (
-          <span className="text-xs bg-[#E5F9EE] text-[#03C75A] px-2 py-0.5 rounded-full font-medium">
+          <span className="text-[10px] bg-[#03C75A] text-white px-2 py-0.5 rounded-sm font-bold tracking-wide">
             인기
           </span>
         )}
