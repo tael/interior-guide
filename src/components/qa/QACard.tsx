@@ -11,7 +11,6 @@ interface Props {
   rank?: number
 }
 
-const RANK_BADGE: Record<number, string> = { 1: '🥇', 2: '🥈', 3: '🥉' }
 
 export function QACard({ item, compact = false, rank }: Props) {
   const { favorites, toggleFavorite, setSelectedItem, likesMap, incrementLike, searchQuery } = useQAStore(
@@ -43,7 +42,9 @@ export function QACard({ item, compact = false, rank }: Props) {
             {category?.icon} {item.category}
           </span>
           {rank && rank <= 3 && (
-            <span className="text-base leading-none">{RANK_BADGE[rank]}</span>
+            <span className="inline-flex items-center text-[10px] bg-[#03C75A] text-white px-1.5 py-0.5 rounded-sm font-bold tracking-wide leading-none">
+              BEST {rank}
+            </span>
           )}
           {item.isFeatured && !rank && (
             <span className="text-[10px] bg-[#03C75A] text-white px-2 py-0.5 rounded-sm font-bold tracking-wide">

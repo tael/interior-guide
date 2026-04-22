@@ -49,7 +49,7 @@ export function SearchPage() {
             value={searchQuery}
             onChange={handleSearch}
             placeholder="도배, 샤시, 화장실 비용... 뭐든 물어보세요"
-            className="w-full pl-10 pr-4 py-2.5 bg-[#F7F7F7] hover:bg-white rounded-full text-sm outline-none border border-[#EBEBEB] focus:ring-2 focus:ring-[#03C75A]/30 focus:border-[#03C75A] focus:bg-white transition-all placeholder-gray-400"
+            className="w-full pl-10 pr-4 py-2.5 bg-[#F7F7F7] hover:bg-white rounded-full text-sm outline-none border border-[#EBEBEB] focus:ring-2 focus:ring-[#03C75A]/30 focus:border-[#03C75A] focus:bg-white shadow-sm transition-all placeholder-gray-400"
           />
           {searchQuery && (
             <button
@@ -122,7 +122,7 @@ export function SearchPage() {
           {recentSearches.length > 0 && (
             <div className="mb-8">
               <div className="flex items-center justify-between mb-2">
-                <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A]">최근 검색어</h2>
+                <h2 className="text-base font-bold text-[#222222]">최근 검색어</h2>
                 <button onClick={clearRecentSearches} className="text-xs text-gray-400">
                   전체 삭제
                 </button>
@@ -143,20 +143,22 @@ export function SearchPage() {
 
           {/* 오늘의 팁 */}
           <div className="mb-8">
-            <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A] mb-2">오늘의 팁</h2>
+            <h2 className="text-base font-bold text-[#222222] mb-2">오늘의 팁</h2>
             <button
               onClick={() => setSelectedItem(todayTip)}
-              className="w-full bg-white border border-[#EBEBEB] border-l-[4px] border-l-[#03C75A] rounded-xl p-4 text-left active:scale-[0.98] transition-transform"
+              className="w-full bg-white border border-[#EBEBEB] border-l-[4px] border-l-[#03C75A] rounded-xl p-4 text-left active:scale-[0.98] transition-transform flex items-center justify-between gap-3"
             >
-              <div className="text-[10px] font-bold text-[#03C75A] uppercase tracking-wide mb-1">💡 {todayTip.category}</div>
-              <div className="text-sm font-semibold text-gray-800 mb-1">{todayTip.question}</div>
-              <div className="text-xs text-gray-500 line-clamp-2">{todayTip.answer}</div>
-              <div className="text-xs text-[#03C75A] font-semibold mt-2">더보기 →</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-bold text-[#03C75A] uppercase tracking-wide mb-1">💡 {todayTip.category}</div>
+                <div className="text-sm font-semibold text-gray-800 mb-1">{todayTip.question}</div>
+                <div className="text-xs text-gray-500 line-clamp-2">{todayTip.answer}</div>
+              </div>
+              <span className="text-[#03C75A] text-lg shrink-0">›</span>
             </button>
           </div>
 
           {/* 카테고리 빠른 접근 */}
-          <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A] mb-3">카테고리별 보기</h2>
+          <h2 className="text-base font-bold text-[#222222] mb-3">카테고리별 보기</h2>
           <div className="grid grid-cols-5 gap-2 mb-8">
             {CATEGORIES.map((cat) => (
               <button
@@ -174,18 +176,9 @@ export function SearchPage() {
             ))}
           </div>
 
-          {/* 질문 추가 CTA */}
-          <button
-            onClick={() => setActiveTab('add')}
-            className="w-full bg-[#03C75A] text-white rounded-xl py-3 mb-8 text-sm font-semibold shadow-sm active:scale-[0.98] transition-transform flex items-center justify-center gap-1.5"
-          >
-            <span>✏️</span>
-            <span>내가 아는 정보 추가하기</span>
-          </button>
-
           {/* 인기 질문 */}
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A]">자주 묻는 질문 · 총 {KNOWLEDGE_BASE.length + userQuestions.length}개</h2>
+            <h2 className="text-base font-bold text-[#222222]">자주 묻는 질문 · 총 {KNOWLEDGE_BASE.length + userQuestions.length}개</h2>
             <button
               onClick={() => setSelectedItem(null)}
               className="flex items-center gap-0.5 text-xs text-[#03C75A] font-semibold px-2 py-1 -mr-2"
