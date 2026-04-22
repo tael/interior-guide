@@ -35,25 +35,34 @@ export function QACard({ item, compact = false, rank }: Props) {
       onClick={() => setSelectedItem(item)}
     >
       <div className="flex items-start gap-2 mb-2">
-        <span
-          className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-semibold shrink-0"
-          style={{ backgroundColor: (category?.color ?? '#03C75A') + '15', color: category?.color ?? '#03C75A' }}
+        <div className="flex items-center gap-2 flex-1">
+          <span
+            className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-semibold shrink-0"
+            style={{ backgroundColor: (category?.color ?? '#03C75A') + '15', color: category?.color ?? '#03C75A' }}
+          >
+            {category?.icon} {item.category}
+          </span>
+          {rank && rank <= 3 && (
+            <span className="text-base leading-none">{RANK_BADGE[rank]}</span>
+          )}
+          {item.isFeatured && !rank && (
+            <span className="text-[10px] bg-[#03C75A] text-white px-2 py-0.5 rounded-sm font-bold tracking-wide">
+              인기
+            </span>
+          )}
+          {item.isUserAdded && (
+            <span className="text-xs bg-blue-50 text-blue-500 px-2 py-0.5 rounded-full font-medium">
+              내 질문
+            </span>
+          )}
+        </div>
+        <button
+          onClick={(e) => { e.stopPropagation(); toggleFavorite(item.id) }}
+          className={clsx('text-lg transition-transform active:scale-125', isFav ? 'text-yellow-400' : 'text-[#CCCCCC]')}
+          aria-label={isFav ? '즐겨찾기 해제' : '즐겨찾기 추가'}
         >
-          {category?.icon} {item.category}
-        </span>
-        {rank && rank <= 3 && (
-          <span className="text-base leading-none">{RANK_BADGE[rank]}</span>
-        )}
-        {item.isFeatured && !rank && (
-          <span className="text-[10px] bg-[#03C75A] text-white px-2 py-0.5 rounded-sm font-bold tracking-wide">
-            인기
-          </span>
-        )}
-        {item.isUserAdded && (
-          <span className="text-xs bg-blue-50 text-blue-500 px-2 py-0.5 rounded-full font-medium">
-            내 질문
-          </span>
-        )}
+          {isFav ? '★' : '☆'}
+        </button>
       </div>
 
       <h3 className="text-[15px] font-semibold text-[#222222] leading-snug mb-1">
@@ -66,30 +75,15 @@ export function QACard({ item, compact = false, rank }: Props) {
         </p>
       )}
 
-      <div
-        className="flex items-center justify-between mt-3"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => incrementLike(item.id)}
-            className="flex items-center gap-1 text-xs text-[#777777] active:text-[#03C75A] transition-colors"
-          >
-            <span>👍</span>
-            <span>{totalLikes}</span>
-          </button>
-          <span className="text-xs text-[#999999]">{item.relatedLinks.length}개 링크</span>
-        </div>
+      <div className="flex items-center gap-3 mt-3" onClick={(e) => e.stopPropagation()}>
         <button
-          onClick={() => toggleFavorite(item.id)}
-          className={clsx(
-            'text-lg transition-transform active:scale-125',
-            isFav ? 'text-yellow-400' : 'text-[#CCCCCC]',
-          )}
-          aria-label={isFav ? '즐겨찾기 해제' : '즐겨찾기 추가'}
+          onClick={() => incrementLike(item.id)}
+          className="flex items-center gap-1 text-xs text-[#777777] active:text-[#03C75A] transition-colors"
         >
-          ★
+          <span>👍</span>
+          <span>{totalLikes}</span>
         </button>
+        <span className="text-xs text-[#999999]">{item.relatedLinks.length}개 링크</span>
       </div>
     </article>
   )

@@ -33,7 +33,7 @@ export function BottomNav() {
             {activeTab === tab.id && (
               <span className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-[#03C75A] rounded-b-full"/>
             )}
-            <span className="relative text-xl leading-none">
+            <span className="relative text-[18px] leading-none">
               {tab.icon}
               {badges[tab.id] != null && (
                 <span className="absolute -top-1 -right-2 min-w-[14px] h-[14px] bg-[#03C75A] text-white text-[9px] font-bold rounded-full flex items-center justify-center px-0.5">
