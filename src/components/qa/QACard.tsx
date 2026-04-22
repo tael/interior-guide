@@ -1,4 +1,5 @@
 import { useQAStore } from '@/stores/qaStore'
+import { useShallow } from 'zustand/react/shallow'
 import type { QAItem } from '@/types/qa'
 import clsx from 'clsx'
 import { CATEGORIES } from '@/constants/categories'
@@ -13,7 +14,16 @@ interface Props {
 const RANK_BADGE: Record<number, string> = { 1: '🥇', 2: '🥈', 3: '🥉' }
 
 export function QACard({ item, compact = false, rank }: Props) {
-  const { favorites, toggleFavorite, setSelectedItem, likesMap, incrementLike, searchQuery } = useQAStore()
+  const { favorites, toggleFavorite, setSelectedItem, likesMap, incrementLike, searchQuery } = useQAStore(
+    useShallow((s) => ({
+      favorites: s.favorites,
+      toggleFavorite: s.toggleFavorite,
+      setSelectedItem: s.setSelectedItem,
+      likesMap: s.likesMap,
+      incrementLike: s.incrementLike,
+      searchQuery: s.searchQuery,
+    })),
+  )
   const isFav = favorites.includes(item.id)
   const category = CATEGORIES.find((c) => c.id === item.category)
   const totalLikes = item.likes + (likesMap[item.id] ?? 0)

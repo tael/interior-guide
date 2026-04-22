@@ -7,11 +7,6 @@ import type { QAStore } from '@/types/store'
 
 const MAX_RECENT = 8
 
-const ALL_ITEMS = (): QAItem[] => {
-  const userQs = loadJSON<QAItem[]>('userQuestions', [])
-  return [...KNOWLEDGE_BASE, ...userQs]
-}
-
 export const useQAStore = create<QAStore>((set, get) => ({
   activeTab: 'search',
   searchQuery: '',
@@ -27,7 +22,7 @@ export const useQAStore = create<QAStore>((set, get) => ({
   setSearchQuery: (query) => set({ searchQuery: query }),
 
   search: (query) => {
-    const results = searchItems(ALL_ITEMS(), query)
+    const results = searchItems([...KNOWLEDGE_BASE, ...get().userQuestions], query)
     const trimmed = query.trim()
     if (trimmed) {
       const prev = get().recentSearches.filter((r) => r !== trimmed)

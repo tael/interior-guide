@@ -105,9 +105,7 @@ export function SearchPage() {
                 질문 추가 탭에서 직접 추가해보세요!
               </p>
               <button
-                onClick={() => {
-                  useQAStore.getState().setActiveTab('add')
-                }}
+                onClick={() => setActiveTab('add')}
                 className="mt-4 px-5 py-2 bg-orange-500 text-white text-sm rounded-full"
               >
                 질문 추가하기
@@ -147,7 +145,7 @@ export function SearchPage() {
           <div className="mb-5">
             <h2 className="text-sm font-semibold text-gray-600 mb-2">오늘의 팁</h2>
             <button
-              onClick={() => useQAStore.getState().setSelectedItem(todayTip)}
+              onClick={() => setSelectedItem(todayTip)}
               className="w-full bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-100 rounded-2xl p-4 text-left active:scale-[0.98] transition-transform"
             >
               <div className="text-xs text-orange-500 font-medium mb-1">💡 {todayTip.category}</div>
