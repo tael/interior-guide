@@ -49,7 +49,7 @@ export function SearchPage() {
             value={searchQuery}
             onChange={handleSearch}
             placeholder="도배, 샤시, 화장실 비용... 뭐든 물어보세요"
-            className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:border-[#03C75A] focus:bg-white transition-all placeholder-gray-400"
+            className="w-full pl-10 pr-4 py-2.5 bg-[#F7F7F7] rounded-full text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:border-[#03C75A] focus:bg-white transition-all placeholder-gray-400"
           />
           {searchQuery && (
             <button
@@ -122,7 +122,7 @@ export function SearchPage() {
           {recentSearches.length > 0 && (
             <div className="mb-5">
               <div className="flex items-center justify-between mb-2">
-                <h2 className="text-sm font-semibold text-gray-600">최근 검색어</h2>
+                <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A]">최근 검색어</h2>
                 <button onClick={clearRecentSearches} className="text-xs text-gray-400">
                   전체 삭제
                 </button>
@@ -143,7 +143,7 @@ export function SearchPage() {
 
           {/* 오늘의 팁 */}
           <div className="mb-5">
-            <h2 className="text-sm font-semibold text-gray-600 mb-2">오늘의 팁</h2>
+            <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A] mb-2">오늘의 팁</h2>
             <button
               onClick={() => setSelectedItem(todayTip)}
               className="w-full bg-gradient-to-r from-[#E5F9EE] to-[#F0FFF8] border border-[#EBEBEB] rounded-2xl p-4 text-left active:scale-[0.98] transition-transform"
@@ -155,7 +155,7 @@ export function SearchPage() {
           </div>
 
           {/* 카테고리 빠른 접근 */}
-          <h2 className="text-sm font-semibold text-gray-600 mb-3">카테고리별 보기</h2>
+          <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A] mb-3">카테고리별 보기</h2>
           <div className="grid grid-cols-5 gap-2 mb-6">
             {CATEGORIES.map((cat) => (
               <button
@@ -176,7 +176,7 @@ export function SearchPage() {
 
           {/* 인기 질문 */}
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-semibold text-gray-600">자주 묻는 질문 · 총 {KNOWLEDGE_BASE.length + userQuestions.length}개</h2>
+            <h2 className="text-sm font-semibold text-[#222222] pl-2.5 border-l-[3px] border-[#03C75A]">자주 묻는 질문 · 총 {KNOWLEDGE_BASE.length + userQuestions.length}개</h2>
             <button
               onClick={() => setSelectedItem(null)}
               className="text-xs text-[#03C75A]"

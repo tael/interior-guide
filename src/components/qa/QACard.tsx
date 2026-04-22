@@ -30,12 +30,13 @@ export function QACard({ item, compact = false, rank }: Props) {
 
   return (
     <article
-      className="bg-white rounded-lg shadow-sm border border-[#EBEBEB] p-4 cursor-pointer active:scale-[0.98] transition-transform"
+      className="bg-white rounded-lg shadow-sm border border-[#EBEBEB] border-l-[3px] p-4 cursor-pointer active:scale-[0.98] transition-transform"
+      style={{ borderLeftColor: category?.color ?? '#03C75A' }}
       onClick={() => setSelectedItem(item)}
     >
       <div className="flex items-start gap-2 mb-2">
         <span
-          className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium shrink-0"
+          className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-semibold shrink-0"
           style={{ backgroundColor: category?.color + '20', color: category?.color }}
         >
           {category?.icon} {item.category}
@@ -55,12 +56,12 @@ export function QACard({ item, compact = false, rank }: Props) {
         )}
       </div>
 
-      <h3 className="text-sm font-semibold text-[#222222] leading-snug mb-1">
+      <h3 className="text-[15px] font-semibold text-[#222222] leading-snug mb-1">
         {highlight(item.question, searchQuery)}
       </h3>
 
       {!compact && (
-        <p className="text-xs text-[#555555] leading-relaxed line-clamp-2">
+        <p className="text-xs text-[#777777] leading-relaxed line-clamp-2">
           {highlight(item.answer, searchQuery)}
         </p>
       )}

@@ -24,7 +24,7 @@ export function BottomNav() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={clsx(
-              'flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-xs transition-colors',
+              'flex-1 flex flex-col items-center justify-center py-3 gap-0.5 text-xs transition-colors',
               activeTab === tab.id
                 ? 'text-[#03C75A] font-bold'
                 : 'text-[#999999]',

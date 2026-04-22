@@ -21,7 +21,7 @@ export function Header() {
           >
             ←
           </button>
-          <h1 className="text-base font-semibold text-[#222222] truncate flex-1">상세 보기</h1>
+          <h1 className="text-[17px] font-bold text-[#222222] truncate flex-1">상세 보기</h1>
         </div>
       </header>
     )
@@ -31,7 +31,7 @@ export function Header() {
     <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white z-40 border-b border-[#EBEBEB]">
       <div className="flex items-center h-14 px-4">
         <span className="text-xl mr-2">🏠</span>
-        <h1 className="text-base font-semibold text-[#222222]">{TAB_TITLES[activeTab]}</h1>
+        <h1 className="text-[17px] font-bold text-[#222222]">{TAB_TITLES[activeTab]}</h1>
       </div>
     </header>
   )

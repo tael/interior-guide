@@ -5,7 +5,7 @@ import { QACard } from '@/components/qa/QACard'
 import { exportData, parseImportData } from '@/utils/exportImport'
 
 export function FavoritesPage() {
-  const { favorites, userQuestions, likesMap, importData } = useQAStore()
+  const { favorites, userQuestions, likesMap, importData, setActiveTab } = useQAStore()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const allItems = [...KNOWLEDGE_BASE, ...userQuestions]
   const favItems = allItems.filter((item) => favorites.includes(item.id))
@@ -71,13 +71,21 @@ export function FavoritesPage() {
       )}
       {userQuestions.length === 0 && favItems.length === 0 && (
         <div className="flex flex-col items-center justify-center py-16 text-center">
-          <div className="text-5xl mb-4">⭐</div>
-          <h3 className="text-base font-semibold text-gray-700 mb-2">저장한 질문이 없어요</h3>
-          <p className="text-sm text-gray-400 leading-relaxed">
+          <div className="w-20 h-20 rounded-full bg-[#E5F9EE] flex items-center justify-center text-4xl mb-4">
+            ⭐
+          </div>
+          <h3 className="text-base font-bold text-[#222222] mb-2">저장한 질문이 없어요</h3>
+          <p className="text-sm text-[#777777] leading-relaxed mb-4">
             자주 참고하고 싶은 답변의
             <br />
             ★ 버튼을 눌러 저장해보세요
           </p>
+          <button
+            onClick={() => setActiveTab('search')}
+            className="px-6 py-2.5 bg-[#03C75A] text-white text-sm font-semibold rounded-full"
+          >
+            인기 질문 보러가기
+          </button>
         </div>
       )}
       {dataControls}
