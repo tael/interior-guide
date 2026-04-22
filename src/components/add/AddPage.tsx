@@ -59,7 +59,7 @@ export function AddPage() {
           </button>
           <button
             onClick={() => setActiveTab('search')}
-            className="px-5 py-2.5 bg-orange-500 text-white text-sm rounded-full"
+            className="px-5 py-2.5 bg-[#03C75A] text-white text-sm rounded-full"
           >
             검색으로 가기
           </button>
@@ -80,7 +80,7 @@ export function AddPage() {
         {/* 카테고리 */}
         <div>
           <label className="text-sm font-medium text-gray-700 block mb-1.5">
-            카테고리 <span className="text-orange-500">*</span>
+            카테고리 <span className="text-[#03C75A]">*</span>
           </label>
           <div className="grid grid-cols-5 gap-2">
             {CATEGORIES.map((cat) => (
@@ -105,14 +105,14 @@ export function AddPage() {
         {/* 질문 */}
         <div>
           <label className="text-sm font-medium text-gray-700 block mb-1.5">
-            질문 <span className="text-orange-500">*</span>
+            질문 <span className="text-[#03C75A]">*</span>
           </label>
           <input
             type="text"
             value={form.question}
             onChange={(e) => setForm((f) => ({ ...f, question: e.target.value }))}
             placeholder="예: 베란다 방수 비용이 얼마나 드나요?"
-            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all"
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:bg-white transition-all"
             maxLength={100}
           />
           <p className="text-xs text-gray-400 mt-1 text-right">{form.question.length}/100</p>
@@ -121,14 +121,14 @@ export function AddPage() {
         {/* 답변 */}
         <div>
           <label className="text-sm font-medium text-gray-700 block mb-1.5">
-            답변 <span className="text-orange-500">*</span>
+            답변 <span className="text-[#03C75A]">*</span>
           </label>
           <textarea
             value={form.answer}
             onChange={(e) => setForm((f) => ({ ...f, answer: e.target.value }))}
             placeholder="알고 있는 내용을 자세히 적어주세요..."
             rows={5}
-            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all resize-none"
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:bg-white transition-all resize-none"
             maxLength={1000}
           />
           <p className="text-xs text-gray-400 mt-1 text-right">{form.answer.length}/1000</p>
@@ -144,7 +144,7 @@ export function AddPage() {
             value={form.tags}
             onChange={(e) => setForm((f) => ({ ...f, tags: e.target.value }))}
             placeholder="예: 방수, 비용, 베란다"
-            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all"
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:bg-white transition-all"
           />
         </div>
 
@@ -158,14 +158,14 @@ export function AddPage() {
             value={form.linkTitle}
             onChange={(e) => setForm((f) => ({ ...f, linkTitle: e.target.value }))}
             placeholder="링크 제목 (예: 도배 비용 블로그)"
-            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all mb-2"
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:bg-white transition-all mb-2"
           />
           <input
             type="url"
             value={form.linkUrl}
             onChange={(e) => setForm((f) => ({ ...f, linkUrl: e.target.value }))}
             placeholder="https://..."
-            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all"
+            className="w-full px-4 py-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:bg-white transition-all"
           />
         </div>
 
@@ -173,7 +173,7 @@ export function AddPage() {
           type="submit"
           disabled={!isValid}
           className="w-full py-3.5 rounded-2xl text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          style={{ backgroundColor: isValid ? '#FF6B35' : undefined, color: isValid ? 'white' : undefined }}
+          style={{ backgroundColor: isValid ? '#03C75A' : undefined, color: isValid ? 'white' : undefined }}
         >
           질문 추가하기
         </button>

@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <p className="text-sm text-gray-500 mb-6">페이지를 새로고침해주세요.</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-orange-500 text-white rounded-full text-sm"
+            className="px-6 py-2 bg-[#03C75A] text-white rounded-full text-sm"
           >
             새로고침
           </button>

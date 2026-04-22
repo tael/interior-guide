@@ -17,7 +17,7 @@ export function BottomNav() {
   }
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white border-t border-gray-100 shadow-lg z-50">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white border-t border-[#EBEBEB] shadow-none z-50">
       <div className="flex">
         {TABS.map((tab) => (
           <button
@@ -26,14 +26,14 @@ export function BottomNav() {
             className={clsx(
               'flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-xs transition-colors',
               activeTab === tab.id
-                ? 'text-orange-500 font-semibold'
-                : 'text-gray-400',
+                ? 'text-[#03C75A] font-bold'
+                : 'text-[#999999]',
             )}
           >
             <span className="relative text-xl leading-none">
               {tab.icon}
               {badges[tab.id] != null && (
-                <span className="absolute -top-1 -right-2 min-w-[14px] h-[14px] bg-orange-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center px-0.5">
+                <span className="absolute -top-1 -right-2 min-w-[14px] h-[14px] bg-[#03C75A] text-white text-[9px] font-bold rounded-full flex items-center justify-center px-0.5">
                   {badges[tab.id]}
                 </span>
               )}

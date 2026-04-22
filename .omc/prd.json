@@ -1,67 +1,79 @@
 {
-  "version": "1.0",
-  "project": "집수리 가이드 (interior-guide)",
+  "version": "2.0",
+  "project": "집수리 가이드 — 네이버 테마 디자인 리뉴얼",
+  "cycle": 1,
+  "maxCycles": 5,
   "stories": [
     {
-      "id": "US-001",
-      "title": "프로젝트 기반 구조",
-      "description": "React+TS+Vite+Tailwind 프로젝트 스캐폴딩",
+      "id": "DS-001",
+      "title": "네이버 디자인 시스템 분석",
       "acceptanceCriteria": [
-        "package.json에 react, zustand, tailwindcss, vite 의존성 존재",
-        "tsconfig.app.json에 strict: true 설정",
-        "vite.config.ts에 base: '/interior-guide/' 설정",
-        "GitHub Actions deploy.yml 존재"
-      ],
-      "passes": true
-    },
-    {
-      "id": "US-002",
-      "title": "지식베이스 데이터",
-      "description": "30개 이상 실용적인 Q&A 데이터",
-      "acceptanceCriteria": [
-        "KNOWLEDGE_BASE 배열에 30개 이상 항목",
-        "각 항목에 id, category, question, answer, tags, relatedLinks, likes 존재",
-        "카테고리 최소 6개 이상 포함",
-        "relatedLinks에 유튜브+블로그 URL 존재",
-        "knowledgeBase.test.ts 모든 테스트 통과"
+        ".omc/naver-design.md 파일에 컬러/타이포/간격/그림자/반경 토큰 정리",
+        "Naver 주요 색상 #03C75A 포함",
+        "모바일 UI 패턴 (네비, 카드, 리스트) 항목 기술"
       ],
       "passes": false
     },
     {
-      "id": "US-003",
-      "title": "Zustand 스토어 + localStorage",
-      "description": "검색, 즐겨찾기, 사용자 질문 상태 관리",
+      "id": "DS-002",
+      "title": "Storybook 설치 및 설정",
       "acceptanceCriteria": [
-        "qaStore.ts에 search, toggleFavorite, addUserQuestion 액션 존재",
-        "favorites와 userQuestions가 localStorage에 저장/복원",
-        "typecheck 통과"
+        "npm run storybook 명령이 존재하고 실행 가능",
+        ".storybook/main.ts 와 .storybook/preview.ts 파일 존재",
+        "QACard, BottomNav, Header 스토리 파일 생성",
+        "npm run build 여전히 통과"
       ],
       "passes": false
     },
     {
-      "id": "US-004",
-      "title": "모바일 UI 컴포넌트",
-      "description": "4탭 네비게이션, 검색, 카드, 상세보기",
+      "id": "DS-003",
+      "title": "네이버 테마 CSS 토큰 적용",
       "acceptanceCriteria": [
-        "BottomNav 4탭 렌더링",
-        "SearchPage 검색바 + 카테고리 + 인기질문 렌더링",
-        "QACard 질문/답변/좋아요/즐겨찾기 버튼 렌더링",
-        "QADetail 전체 답변 + 관련 링크 렌더링",
-        "BrowsePage 카테고리별 목록 렌더링",
-        "AddPage 폼 검증 동작",
-        "빌드 성공"
+        "index.css에 --naver-green, --text-primary, --text-secondary, --border, --bg-card CSS 변수 정의",
+        "기존 orange 계열에서 네이버 green 계열로 primary 색상 전환",
+        "npm run build 통과, typecheck 통과"
       ],
       "passes": false
     },
     {
-      "id": "US-005",
-      "title": "GitHub 레포 + Pages 배포",
-      "description": "공개 GitHub 레포 생성 및 접근 가능 URL",
+      "id": "DS-004",
+      "title": "컴포넌트 디자인 개선 (1차)",
       "acceptanceCriteria": [
-        "GitHub 레포 tael/interior-guide 생성",
-        "main 브랜치에 코드 push",
-        "GitHub Pages 활성화",
-        "https://tael.github.io/interior-guide/ 접근 가능"
+        "BottomNav: 네이버 스타일 탭바 (active=green, 텍스트+아이콘 강조)",
+        "QACard: border-radius 16px→8px, 네이버 카드 스타일 적용",
+        "Header: 네이버 앱바 스타일 (흰 배경, 그린 accent, 간결)",
+        "npm run typecheck 통과"
+      ],
+      "passes": false
+    },
+    {
+      "id": "DS-005",
+      "title": "검색바 + 홈화면 디자인 개선",
+      "acceptanceCriteria": [
+        "SearchPage 검색바: 네이버 검색창 스타일 (녹색 테두리 focus, 돋보기 아이콘)",
+        "카테고리 그리드: 네이버 서비스 아이콘 그리드 스타일",
+        "오늘의 팁 카드: 네이버 뉴스/콘텐츠 카드 스타일",
+        "npm run typecheck 통과"
+      ],
+      "passes": false
+    },
+    {
+      "id": "DS-006",
+      "title": "Playwright 스크린샷 QA",
+      "acceptanceCriteria": [
+        ".omc/screenshots/ 폴더에 홈/카테고리/상세/추가/즐겨찾기 스크린샷 생성",
+        "스크린샷이 375px 모바일 뷰포트",
+        "빌드된 앱(dist/)을 대상으로 촬영"
+      ],
+      "passes": false
+    },
+    {
+      "id": "DS-007",
+      "title": "커밋 & 배포",
+      "acceptanceCriteria": [
+        "git commit with 디자인 변경 내역 메시지",
+        "git push origin main 성공",
+        "GitHub Actions 워크플로우 트리거됨"
       ],
       "passes": false
     }

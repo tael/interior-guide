@@ -7,7 +7,7 @@ export function highlight(text: string, query: string): ReactNode {
   // split with capture group → odd indices are the matched segments
   return parts.map((part, i) =>
     i % 2 === 1 ? (
-      <mark key={i} className="bg-orange-100 text-orange-700 rounded-sm px-0.5 not-italic">
+      <mark key={i} className="bg-[#E5F9EE] text-[#02A549] rounded-sm px-0.5 not-italic">
         {part}
       </mark>
     ) : (

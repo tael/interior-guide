@@ -49,7 +49,7 @@ export function SearchPage() {
             value={searchQuery}
             onChange={handleSearch}
             placeholder="도배, 샤시, 화장실 비용... 뭐든 물어보세요"
-            className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 focus:ring-orange-300 focus:bg-white transition-all placeholder-gray-400"
+            className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:border-[#03C75A] focus:bg-white transition-all placeholder-gray-400"
           />
           {searchQuery && (
             <button
@@ -74,7 +74,7 @@ export function SearchPage() {
               <button
                 key={tag}
                 onClick={() => search(tag)}
-                className="text-xs bg-orange-50 text-orange-600 px-3 py-1.5 rounded-full border border-orange-100"
+                className="text-xs bg-[#E5F9EE] text-[#02A549] px-3 py-1.5 rounded-full border border-[#EBEBEB]"
               >
                 #{tag}
               </button>
@@ -106,7 +106,7 @@ export function SearchPage() {
               </p>
               <button
                 onClick={() => setActiveTab('add')}
-                className="mt-4 px-5 py-2 bg-orange-500 text-white text-sm rounded-full"
+                className="mt-4 px-5 py-2 bg-[#03C75A] text-white text-sm rounded-full"
               >
                 질문 추가하기
               </button>
@@ -132,7 +132,7 @@ export function SearchPage() {
                   <button
                     key={q}
                     onClick={() => search(q)}
-                    className="text-xs bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full active:bg-orange-100 active:text-orange-600 transition-colors"
+                    className="text-xs bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full active:bg-[#E5F9EE] active:text-[#02A549] transition-colors"
                   >
                     🕐 {q}
                   </button>
@@ -146,9 +146,9 @@ export function SearchPage() {
             <h2 className="text-sm font-semibold text-gray-600 mb-2">오늘의 팁</h2>
             <button
               onClick={() => setSelectedItem(todayTip)}
-              className="w-full bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-100 rounded-2xl p-4 text-left active:scale-[0.98] transition-transform"
+              className="w-full bg-gradient-to-r from-[#E5F9EE] to-[#F0FFF8] border border-[#EBEBEB] rounded-2xl p-4 text-left active:scale-[0.98] transition-transform"
             >
-              <div className="text-xs text-orange-500 font-medium mb-1">💡 {todayTip.category}</div>
+              <div className="text-xs text-[#03C75A] font-medium mb-1">💡 {todayTip.category}</div>
               <div className="text-sm font-semibold text-gray-800 mb-1">{todayTip.question}</div>
               <div className="text-xs text-gray-500 line-clamp-2">{todayTip.answer}</div>
             </button>
@@ -179,7 +179,7 @@ export function SearchPage() {
             <h2 className="text-sm font-semibold text-gray-600">자주 묻는 질문 · 총 {KNOWLEDGE_BASE.length + userQuestions.length}개</h2>
             <button
               onClick={() => setSelectedItem(null)}
-              className="text-xs text-orange-500"
+              className="text-xs text-[#03C75A]"
             >
               전체보기
             </button>

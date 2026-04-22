@@ -32,10 +32,10 @@ export function CostCalc() {
     <div className="mb-4">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center justify-between bg-orange-50 border border-orange-100 rounded-2xl px-4 py-3 text-sm text-orange-700 font-medium"
+        className="w-full flex items-center justify-between bg-[#E5F9EE] border border-[#EBEBEB] rounded-2xl px-4 py-3 text-sm text-[#02A549] font-medium"
       >
         <span>🧮 공사 비용 간단 계산기</span>
-        <span className="text-orange-400">{open ? '▲' : '▼'}</span>
+        <span className="text-[#03C75A]">{open ? '▲' : '▼'}</span>
       </button>
 
       {open && (
@@ -49,8 +49,8 @@ export function CostCalc() {
                   onClick={() => setWorkId(w.id)}
                   className="flex flex-col items-center gap-1 py-2 px-1 rounded-xl text-xs transition-all border-2"
                   style={{
-                    borderColor: workId === w.id ? '#FF6B35' : 'transparent',
-                    backgroundColor: workId === w.id ? '#FFF3EE' : '#F9FAFB',
+                    borderColor: workId === w.id ? '#03C75A' : 'transparent',
+                    backgroundColor: workId === w.id ? '#E5F9EE' : '#F9FAFB',
                   }}
                 >
                   <span>{w.icon}</span>
@@ -69,16 +69,16 @@ export function CostCalc() {
               value={area}
               onChange={(e) => setArea(e.target.value)}
               placeholder="예: 25"
-              className="w-full px-4 py-2.5 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-300"
+              className="w-full px-4 py-2.5 bg-gray-50 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30"
               min="1"
               max="200"
             />
           </div>
 
           {py > 0 ? (
-            <div className="bg-orange-50 rounded-xl p-3 text-center">
+            <div className="bg-[#E5F9EE] rounded-xl p-3 text-center">
               <p className="text-xs text-gray-500 mb-1">{py}평 {work.label} 예상 비용</p>
-              <p className="text-xl font-bold text-orange-600">
+              <p className="text-xl font-bold text-[#02A549]">
                 {minCost}만 – {maxCost}만원
               </p>
               <p className="text-xs text-gray-400 mt-1">

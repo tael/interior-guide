@@ -60,7 +60,7 @@ export function QADetail() {
           {category?.icon} {item.category}
         </span>
         {item.isFeatured && (
-          <span className="text-xs bg-orange-50 text-orange-500 px-2.5 py-1 rounded-full font-medium">
+          <span className="text-xs bg-[#E5F9EE] text-[#03C75A] px-2.5 py-1 rounded-full font-medium">
             인기 질문
           </span>
         )}
@@ -73,10 +73,10 @@ export function QADetail() {
 
       <h2 className="text-lg font-bold text-gray-800 leading-snug mb-5">{item.question}</h2>
 
-      <div className="bg-orange-50 rounded-2xl p-4 mb-5">
+      <div className="bg-[#E5F9EE] rounded-2xl p-4 mb-5">
         <div className="flex items-center gap-1.5 mb-2">
           <span className="text-base">💡</span>
-          <span className="text-sm font-semibold text-orange-600">답변</span>
+          <span className="text-sm font-semibold text-[#02A549]">답변</span>
         </div>
         <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{item.answer}</p>
       </div>
@@ -108,7 +108,7 @@ export function QADetail() {
             <button
               key={tag}
               onClick={() => handleTagClick(tag)}
-              className="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full active:bg-orange-100 active:text-orange-600 transition-colors"
+              className="text-xs bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full active:bg-[#E5F9EE] active:text-[#02A549] transition-colors"
             >
               #{tag}
             </button>
@@ -124,7 +124,7 @@ export function QADetail() {
               <button
                 key={related.id}
                 onClick={() => setSelectedItem(related)}
-                className="text-left bg-gray-50 rounded-xl px-3 py-2.5 text-xs text-gray-600 active:bg-orange-50 active:text-orange-600 transition-colors"
+                className="text-left bg-gray-50 rounded-xl px-3 py-2.5 text-xs text-gray-600 active:bg-[#E5F9EE] active:text-[#02A549] transition-colors"
               >
                 → {related.question}
               </button>
@@ -136,7 +136,7 @@ export function QADetail() {
       <div className="flex items-center gap-2">
         <button
           onClick={() => incrementLike(item.id)}
-          className="flex items-center gap-1.5 text-sm text-gray-500 bg-gray-50 rounded-full px-4 py-2 active:bg-orange-50 active:text-orange-500 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-gray-500 bg-gray-50 rounded-full px-4 py-2 active:bg-[#E5F9EE] active:text-[#03C75A] transition-colors"
         >
           <span>👍</span>
           <span>도움됐어요 {totalLikes}</span>

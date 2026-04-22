@@ -30,7 +30,7 @@ export function QACard({ item, compact = false, rank }: Props) {
 
   return (
     <article
-      className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 cursor-pointer active:scale-[0.98] transition-transform"
+      className="bg-white rounded-lg shadow-sm border border-[#EBEBEB] p-4 cursor-pointer active:scale-[0.98] transition-transform"
       onClick={() => setSelectedItem(item)}
     >
       <div className="flex items-start gap-2 mb-2">
@@ -44,7 +44,7 @@ export function QACard({ item, compact = false, rank }: Props) {
           <span className="text-base leading-none">{RANK_BADGE[rank]}</span>
         )}
         {item.isFeatured && !rank && (
-          <span className="text-xs bg-orange-50 text-orange-500 px-2 py-0.5 rounded-full font-medium">
+          <span className="text-xs bg-[#E5F9EE] text-[#03C75A] px-2 py-0.5 rounded-full font-medium">
             인기
           </span>
         )}
@@ -55,12 +55,12 @@ export function QACard({ item, compact = false, rank }: Props) {
         )}
       </div>
 
-      <h3 className="text-sm font-semibold text-gray-800 leading-snug mb-1">
+      <h3 className="text-sm font-semibold text-[#222222] leading-snug mb-1">
         {highlight(item.question, searchQuery)}
       </h3>
 
       {!compact && (
-        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">
+        <p className="text-xs text-[#555555] leading-relaxed line-clamp-2">
           {highlight(item.answer, searchQuery)}
         </p>
       )}
@@ -72,7 +72,7 @@ export function QACard({ item, compact = false, rank }: Props) {
         <div className="flex items-center gap-3">
           <button
             onClick={() => incrementLike(item.id)}
-            className="flex items-center gap-1 text-xs text-gray-400 active:text-orange-500 transition-colors"
+            className="flex items-center gap-1 text-xs text-gray-400 active:text-[#03C75A] transition-colors"
           >
             <span>👍</span>
             <span>{totalLikes}</span>
@@ -83,7 +83,7 @@ export function QACard({ item, compact = false, rank }: Props) {
           onClick={() => toggleFavorite(item.id)}
           className={clsx(
             'text-lg transition-transform active:scale-125',
-            isFav ? 'text-yellow-400' : 'text-gray-200',
+            isFav ? 'text-[#03C75A]' : 'text-gray-200',
           )}
           aria-label={isFav ? '즐겨찾기 해제' : '즐겨찾기 추가'}
         >
