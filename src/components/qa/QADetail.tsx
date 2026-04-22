@@ -136,7 +136,7 @@ export function QADetail() {
       <div className="flex items-center gap-2">
         <button
           onClick={() => incrementLike(item.id)}
-          className="flex items-center gap-1.5 text-sm text-gray-500 bg-gray-50 rounded-full px-4 py-2 active:bg-[#E5F9EE] active:text-[#03C75A] transition-colors"
+          className="flex items-center gap-1.5 text-sm text-gray-500 bg-white border border-[#EBEBEB] rounded-full px-4 py-2 active:bg-[#E5F9EE] active:text-[#03C75A] transition-colors"
         >
           <span>👍</span>
           <span>도움됐어요 {totalLikes}</span>
@@ -145,7 +145,7 @@ export function QADetail() {
           onClick={() => toggleFavorite(item.id)}
           className={clsx(
             'flex items-center gap-1.5 text-sm rounded-full px-4 py-2 transition-colors',
-            isFav ? 'bg-yellow-50 text-yellow-500' : 'bg-gray-50 text-gray-500',
+            isFav ? 'bg-yellow-50 border border-yellow-200 text-yellow-500' : 'bg-white border border-[#EBEBEB] text-[#555555]',
           )}
         >
           <span>{isFav ? '★' : '☆'}</span>
@@ -153,7 +153,7 @@ export function QADetail() {
         </button>
         <button
           onClick={handleShare}
-          className="flex items-center gap-1.5 text-sm text-gray-500 bg-gray-50 rounded-full px-4 py-2 active:bg-blue-50 active:text-blue-500 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-gray-500 bg-white border border-[#EBEBEB] rounded-full px-4 py-2 active:bg-blue-50 active:text-blue-500 transition-colors"
         >
           <span>↗️</span>
           <span>공유</span>

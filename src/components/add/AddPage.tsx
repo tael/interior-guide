@@ -172,7 +172,7 @@ export function AddPage() {
         <button
           type="submit"
           disabled={!isValid}
-          className="w-full py-3.5 rounded-2xl text-sm font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full py-3.5 rounded-xl shadow-sm active:scale-[0.98] transition-transform text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ backgroundColor: isValid ? '#03C75A' : undefined, color: isValid ? 'white' : undefined }}
         >
           질문 추가하기

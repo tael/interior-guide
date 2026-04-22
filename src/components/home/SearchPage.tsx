@@ -49,7 +49,7 @@ export function SearchPage() {
             value={searchQuery}
             onChange={handleSearch}
             placeholder="도배, 샤시, 화장실 비용... 뭐든 물어보세요"
-            className="w-full pl-10 pr-4 py-2.5 bg-[#F7F7F7] rounded-full text-sm outline-none focus:ring-2 focus:ring-[#03C75A]/30 focus:border-[#03C75A] focus:bg-white transition-all placeholder-gray-400"
+            className="w-full pl-10 pr-4 py-2.5 bg-[#F7F7F7] hover:bg-white rounded-full text-sm outline-none border border-transparent focus:ring-2 focus:ring-[#03C75A]/30 focus:border-[#03C75A] focus:bg-white transition-all placeholder-gray-400"
           />
           {searchQuery && (
             <button
@@ -161,10 +161,10 @@ export function SearchPage() {
               <button
                 key={cat.id}
                 onClick={() => handleCategoryClick(cat.id)}
-                className="flex flex-col items-center gap-1 active:opacity-70 transition-opacity"
+                className="flex flex-col items-center gap-1 active:opacity-70 hover:-translate-y-0.5 transition-all"
               >
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-sm"
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-sm hover:shadow-md transition-shadow"
                   style={{ backgroundColor: cat.color + '15' }}
                 >
                   {cat.icon}

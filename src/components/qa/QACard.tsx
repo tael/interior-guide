@@ -30,14 +30,14 @@ export function QACard({ item, compact = false, rank }: Props) {
 
   return (
     <article
-      className="bg-white rounded-lg shadow-sm border border-[#EBEBEB] border-l-[3px] p-4 cursor-pointer active:scale-[0.98] transition-transform"
+      className="bg-white rounded-lg shadow-sm border border-[#EBEBEB] border-l-[3px] p-4 cursor-pointer active:scale-[0.98] hover:border-[#03C75A]/30 transition-all"
       style={{ borderLeftColor: category?.color ?? '#03C75A' }}
       onClick={() => setSelectedItem(item)}
     >
       <div className="flex items-start gap-2 mb-2">
         <span
           className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-semibold shrink-0"
-          style={{ backgroundColor: category?.color + '20', color: category?.color }}
+          style={{ backgroundColor: (category?.color ?? '#03C75A') + '15', color: category?.color ?? '#03C75A' }}
         >
           {category?.icon} {item.category}
         </span>
@@ -73,12 +73,12 @@ export function QACard({ item, compact = false, rank }: Props) {
         <div className="flex items-center gap-3">
           <button
             onClick={() => incrementLike(item.id)}
-            className="flex items-center gap-1 text-xs text-gray-400 active:text-[#03C75A] transition-colors"
+            className="flex items-center gap-1 text-xs text-[#777777] active:text-[#03C75A] transition-colors"
           >
             <span>👍</span>
             <span>{totalLikes}</span>
           </button>
-          <span className="text-xs text-gray-300">{item.relatedLinks.length}개 링크</span>
+          <span className="text-xs text-[#999999]">{item.relatedLinks.length}개 링크</span>
         </div>
         <button
           onClick={() => toggleFavorite(item.id)}

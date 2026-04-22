@@ -28,17 +28,17 @@ export function FavoritesPage() {
 
   const dataControls = (
     <div className="mt-6 border-t border-gray-100 pt-4">
-      <p className="text-xs text-gray-400 mb-2 text-center">데이터 관리</p>
+      <p className="text-xs text-[#777777] font-medium mb-2 text-center">데이터 관리</p>
       <div className="flex gap-2">
         <button
           onClick={() => exportData(userQuestions, favorites, likesMap)}
-          className="flex-1 py-2.5 text-xs bg-gray-50 text-gray-600 rounded-xl border border-gray-100 active:bg-gray-100"
+          className="flex-1 py-2.5 text-xs bg-white text-[#555555] rounded-lg border border-[#EBEBEB] active:bg-[#F5F5F5]"
         >
           📤 내보내기
         </button>
         <button
           onClick={() => fileInputRef.current?.click()}
-          className="flex-1 py-2.5 text-xs bg-gray-50 text-gray-600 rounded-xl border border-gray-100 active:bg-gray-100"
+          className="flex-1 py-2.5 text-xs bg-white text-[#555555] rounded-lg border border-[#EBEBEB] active:bg-[#F5F5F5]"
         >
           📥 가져오기
         </button>
